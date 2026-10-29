@@ -44,7 +44,7 @@ Concepts: threshold conversion, AND/OR, intermediate gate evaluation, and nonequ
 3. Compare an applicant and lower attendance to 74%. Both qualifying pathways are blocked by C. Discard the alternative.
 4. Inspect minimal correction sets, switch demonstration policies, and explore truth-table rows without changing numeric inputs.
 
-Inspect the four-variable Karnaugh map: rows and columns follow Gray-code order. Clicking a cell reveals its Boolean combination without changing the numeric applicant.
+Inspect the four-variable Karnaugh map: rows and columns follow Gray-code order. Clicking a cell inspects the Boolean combination. Use Apply combination to scenario to set numeric values that realize it. With a zero CGPA/attendance minimum, the corresponding failed condition cannot be represented; the lab explains this and preserves the inputs.
 
 Concepts: necessary conditions, alternative sufficient pathways, sensitivity to single flips, and minimal sets of failed conditions to correct. These are hypothetical scholarship policies.
 
@@ -58,3 +58,7 @@ Concepts: necessary conditions, alternative sufficient pathways, sensitivity to 
 Compare the three-variable Karnaugh map with the two circuit designs. The map's true cells form the two overlapping pairs TV and TC; both circuits still produce the same result in all eight combinations. Space plays/pauses when focus is outside a field or button.
 
 Concepts: strict > thresholds, root-cause branches, distributive law, and gate-count reduction from 3 to 2 two-input gates. A false illustrative fault rule is not a real-world safety guarantee.
+
+## Warm presentation and reports
+
+The header theme toggle switches between espresso/amber dark mode and archival parchment light mode. Newsreader headings and copper/brass diagrams replace the previous neon treatment. Use Analysis as PDF in Export / share for a structured mathematical report with active inputs, computed summary tables, assumptions and page numbering. In the machine K-map, inspect T=1, V=0, C=1 and apply it: readings become temperature threshold + 1, vibration exactly at its threshold, and cooling failed. The TC branch triggers and event history records the transition.

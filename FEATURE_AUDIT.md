@@ -54,3 +54,13 @@ Lighthouse mobile/simulated-throttling measurements against the local production
 Scores vary with host load and deployment. These are measured routes, not an assertion that every possible user scenario has the same score. The initial heavy-route performance scores were 83/84; splitting initial dependencies and deferring offscreen typesetting improved the observed result. Generated reports are ignored by Git and can be recreated with Lighthouse against `npm run preview`.
 
 The final source review also hardened shared scenarios against reserved graph identifiers, missing target/simulation references and writer/reader size-limit mismatches. A mutation check confirmed that weakening a shared brightness boundary causes the sharing regression suite to fail. Original mathematical regression coverage remains unchanged.
+
+## Warm atelier polish (current presentation)
+
+Replaced the cold palette and neon effects with the brief's warm obsidian/espresso, honey amber, terracotta, sage and parchment tokens. Headings and the wordmark now use self-hosted Newsreader. SVG fills, wire colors, lattice accents, minimaps, graph statuses, Gantt bars and timeline cards use theme variables. Removed unused Vite assets and the empty applications directory. Existing features and routes remain intact.
+
+K-map inspection now offers an explicit Apply combination to scenario action. Scholarship application adjusts the active applicant (including a temporary comparison); machine application pauses playback, sets readings around the actual strict thresholds and records real transitions. Zero-minimum policies that cannot represent a failed condition produce an explanation and preserve inputs. Unit tests exhaust every representable combination.
+
+PDF export now creates an editorial report model rather than dumping interface text. Reports include a serif header, India-time metadata, active parameters, computed summaries, module-specific tables, assumptions, repeated table headers and page numbers. Long cells paginate safely. The exported two-page machine report was extracted and rendered with Poppler; both pages were visually inspected for clipping, alignment and legibility.
+
+Four added polish suites cover K-map input conversion, boundary errors, report correctness and long-row pagination. Existing ten suites remain intact. Browser regression screenshots now assert the exact warm tokens and Newsreader in both themes at 1440px and 390px; an additional workflow checks actual K-map application and report download.
