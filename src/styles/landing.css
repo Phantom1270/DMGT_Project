@@ -1,8 +1,22 @@
 /* Proof Atlas. Only the overview uses this composition. */
+.app-shell[data-page=overview] { max-width:1504px; padding:0 32px; }
+.app-shell[data-page=overview] .app-header { height:72px; border:0; }
+.app-shell[data-page=overview] .brand-mark { border:0; background:none; width:28px; }
+.app-shell[data-page=overview] .brand small { font-size:1rem; }
+.app-shell[data-page=overview] .module-badge { font-size:1rem; }
+.app-shell[data-page=overview] .icon-control { min-width:44px; min-height:44px; box-shadow:none; background:none; border-color:transparent; }
+.app-shell[data-page=overview] .lab-navigation { border:0; border-radius:0; background:none; padding:0; margin:0 0 24px; width:auto; display:flex; flex-wrap:wrap; gap:0 28px; }
+.app-shell[data-page=overview] .lab-navigation a { border-radius:0; padding:8px 0; min-height:44px; font-size:1rem; background:none; box-shadow:none; white-space:normal; }
+.app-shell[data-page=overview] .lab-navigation a.active { color:var(--text-primary); text-decoration:underline; text-underline-offset:6px; }
+.app-shell[data-page=overview] .overview-workspace { padding-top:12px; }
+.app-shell[data-page=overview] footer { border:0; margin-top:64px; padding:24px 0 48px; display:grid; grid-template-columns:5fr 7fr; align-items:end; gap:24px; }
+.atlas-footer-wordmark { font:600 clamp(3.428571rem,7vw,7rem)/1 var(--font-editorial); letter-spacing:-.04em; color:var(--text-primary); text-decoration:none; }
+.atlas-footer-notes { font-size:1rem; }
+.atlas-footer-notes p { margin:8px 0 0; }
 .atlas { --atlas-ease-out:cubic-bezier(.23,1,.32,1); --atlas-small:1rem; --atlas-body:1.285714rem; font-size:var(--atlas-body); line-height:1.55; color:var(--text-primary); }
 .atlas p { color:var(--text-primary); }
 .atlas h1,.atlas h2,.atlas h3 { font-weight:600; line-height:1.02; letter-spacing:-.035em; margin:0; }
-.atlas h1 { font-size:clamp(3rem,7.3vw,7.42857rem); }
+.atlas h1 { font-size:clamp(3rem,7.3vw,7.42857rem); overflow-wrap:anywhere; }
 .atlas h2 { font-size:clamp(2.28571rem,3.3vw,3.42857rem); }
 .atlas h3 { font-size:clamp(2.14286rem,3vw,3rem); }
 .atlas h3 a { color:inherit; text-decoration:none; display:flex; align-items:baseline; gap:16px; }
@@ -18,7 +32,7 @@
 .atlas .atlas-action:hover { box-shadow:none; transform:none; }
 .atlas-proof-band { grid-row:1; display:grid; grid-template-columns:5fr 7fr; gap:24px; align-items:stretch; }
 .atlas-lattice { display:grid; grid-template-columns:minmax(0,1fr) auto; grid-template-rows:auto 1fr; margin:0; background:var(--bg-secondary); padding:20px 24px; }
-.atlas-lattice figcaption { display:flex; justify-content:space-between; gap:12px; font-size:var(--atlas-small); grid-column:1/-1; }
+.atlas-lattice figcaption { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:var(--atlas-small); grid-column:1/-1; }
 .atlas-lattice figcaption span { color:var(--text-secondary); }
 .atlas-lattice-svg { width:100%; height:244px; min-width:0; overflow:visible; }
 .atlas-lattice-edges { fill:none; stroke:var(--text-secondary); stroke-width:1.5; }
@@ -69,6 +83,8 @@
   .atlas-action:active { transform:scale(.99); }
 }
 @media(max-width:1099px) {
+  .app-shell[data-page=overview] { padding:0 24px; }
+  .app-shell[data-page=overview] .lab-navigation { gap:0 20px; }
   .atlas-intro { grid-template-columns:1fr 1fr; }
   .atlas h1 { font-size:5.142857rem; }
   .atlas-proof-band { grid-row:auto; grid-template-columns:1fr 1fr; }
@@ -82,6 +98,19 @@
   .atlas-task-stage { grid-template-columns:1fr; }
 }
 @media(max-width:767px) {
+  .app-shell[data-page=overview] { padding:0 16px; }
+  .app-shell[data-page=overview] .app-header { height:auto; min-height:72px; flex-wrap:wrap; padding:8px 0; gap:8px; }
+  .app-shell[data-page=overview] .brand { gap:4px; }
+  .app-shell[data-page=overview] .brand small { display:none; }
+  .app-shell[data-page=overview] .system-theme { display:inline-flex!important; }
+  .app-shell[data-page=overview] .header-tools { gap:0; }
+  .app-shell[data-page=overview] .brand-mark { display:none; }
+  .app-shell[data-page=overview] .lab-navigation { display:grid; grid-template-columns:1fr 1fr; gap:0 16px; margin-bottom:16px; }
+  .app-shell[data-page=overview] .lab-navigation a { justify-content:flex-start; min-width:0; line-height:1.35; gap:8px; }
+  .app-shell[data-page=overview] .lab-navigation a > span:not(.nav-selection) { display:inline; overflow-wrap:anywhere; min-width:0; }
+  .app-shell[data-page=overview] .lab-navigation svg { flex:none; width:16px; }
+  .app-shell[data-page=overview] footer { display:block; margin-top:48px; padding:16px 0 32px; }
+  .atlas-footer-notes { margin-top:24px; }
   .atlas { --atlas-body:1.142857rem; }
   .atlas-hero { gap:32px; }
   .atlas-intro { display:flex; flex-direction:column; gap:20px; }
@@ -94,7 +123,7 @@
   .atlas-summary p { margin-bottom:16px; }
   .atlas-proof-band { display:block; }
   .atlas-lattice { padding:20px 16px; }
-  .atlas .lattice-controls { order:0; align-items:center; }
+  .atlas .lattice-controls { order:0; align-items:center; flex-wrap:wrap; }
   .atlas-lattice-svg { height:auto; max-height:260px; margin-top:16px; }
   .atlas .lattice-controls button { min-width:66px; }
   .atlas-catalog { margin-top:64px; display:flex; flex-direction:column; gap:48px; }

@@ -160,7 +160,7 @@ function Shell() {
             ?.click();
           return;
         }
-        if (event.code === "Space" && !target.closest("button,a,summary")) {
+        if (current && event.code === "Space" && !target.closest("button,a,summary")) {
           event.preventDefault();
           window.dispatchEvent(new Event("lab:playback"));
           return;
@@ -182,9 +182,9 @@ function Shell() {
     };
     window.addEventListener("keydown", listener);
     return () => window.removeEventListener("keydown", listener);
-  }, [help, navigate, pathname, toggle]);
+  }, [help, navigate, pathname, toggle, current]);
   return (
-    <div className="app-shell">
+    <div className="app-shell" data-page={pathname === "/" ? "overview" : "lab"}>
       <a className="skip" href="#workspace">
         Skip to laboratory
       </a>
@@ -231,7 +231,7 @@ function Shell() {
         <NavLink to="/" end aria-label="Overview">
           {({ isActive }) => (
             <>
-              {isActive && (
+              {isActive && pathname !== "/" && (
                 <m.span
                   className="nav-selection"
                   layoutId="lab-navigation"
@@ -247,7 +247,7 @@ function Shell() {
           <NavLink key={id} to={`/${id}`} aria-label={name}>
             {({ isActive }) => (
               <>
-                {isActive && (
+                {isActive && pathname !== "/" && (
                   <m.span
                     className="nav-selection"
                     layoutId="lab-navigation"
@@ -282,9 +282,9 @@ function Shell() {
         <AnimatePresence mode="wait" initial={false}>
           <m.div
             key={pathname}
-            initial={reduced ? false : { opacity: 0, y: 8 }}
+            initial={reduced || pathname === "/" ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={reduced ? { opacity: 1 } : { opacity: 0, y: -5 }}
+            exit={reduced || pathname === "/" ? { opacity: 1 } : { opacity: 0, y: -5 }}
             transition={{ duration: 0.16 }}
           >
             <RouteFocus>
@@ -323,13 +323,18 @@ function Shell() {
         </AnimatePresence>
       </main>
       <footer>
+        {pathname === "/" ? <>
+          <Link to="/" className="atlas-footer-wordmark">DiscreteLab.</Link>
+          <div className="atlas-footer-notes"><p>Module 4 · Lattices &amp; Boolean algebra</p><p>Explore. Change. Understand.</p></div>
+        </> : <>
         <span>
           <FlaskConical size={14} /> DiscreteLab · An interactive mathematics
-          observatory
+          atelier
         </span>
         <span>
           {known ? "Explore. Change. Understand." : "Choose a lab to begin."}
         </span>
+        </>}
       </footer>
       <dialog
         ref={dialog}

@@ -13,7 +13,7 @@ export function LatticeExperiment({ a, b, onAChange, onBChange }: {
         </div>
         <span aria-live="polite" aria-atomic="true">a ∧ b = {Number(a && b)}<br />a ∨ b = {Number(a || b)}</span>
       </div>
-      <svg className="atlas-lattice-svg" viewBox="0 0 420 260" role="img" aria-label="Four-element subset lattice. Meet is intersection and join is union.">
+      <svg className="atlas-lattice-svg" viewBox="45 0 330 260" role="img" aria-label="Four-element subset lattice. Meet is intersection and join is union.">
         <path d="M210 30 L85 130 L210 230 L335 130 Z" className="atlas-lattice-edges" />
         {[
           { x: 210, y: 30, label: "{a, b}", active: a && b },
