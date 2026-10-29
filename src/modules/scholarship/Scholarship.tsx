@@ -1,4 +1,6 @@
-import { useLabState } from "../lib/useLabState";
+import { MathFormula } from "../../components/Math";
+import { KarnaughMap } from "../../components/KarnaughMap";
+import { useLabState } from "../../lib/useLabState";
 import {
   applicantBits,
   corrections,
@@ -6,9 +8,9 @@ import {
   policyNames,
   scholarship,
   type Policy,
-} from "../lib/analysis";
-import { BooleanCircuit } from "../components/BooleanCircuit";
-import { inputGate, gate } from "../lib/circuit";
+} from "../../lib/analysis";
+import { BooleanCircuit } from "../../components/BooleanCircuit";
+import { inputGate, gate } from "../../lib/circuit";
 import {
   Demo,
   Check,
@@ -16,7 +18,7 @@ import {
   NumberInput,
   Panel,
   TruthTable,
-} from "../components/Lab";
+} from "../../components/Lab";
 const sample = {
   cgpa: 8.4,
   income: 300000,
@@ -231,7 +233,16 @@ export default function Scholarship() {
                     ? "Eligible under demonstration policy"
                     : "Not eligible under demonstration policy"}
                 </div>
-                <p className="formula">{policyExpressions[policy]}</p>
+                <MathFormula
+                  block
+                  expression={
+                    policy === "balanced"
+                      ? String.raw`E=C\land((A\land B)\lor D)`
+                      : policy === "merit"
+                        ? String.raw`E=C\land A`
+                        : String.raw`E=C\land B`
+                  }
+                />
                 <BooleanCircuit title="Active policy circuit" gates={circuit} />
                 <div className="condition-list">
                   {[
@@ -315,6 +326,11 @@ export default function Scholarship() {
               inspection changes no applicant values.
             </p>
           </Explanation>
+          <KarnaughMap
+            variables={symbols}
+            evaluate={(x) => scholarship(x, policy)}
+            current={bits}
+          />
           <TruthTable
             variables={symbols}
             evaluate={(x) => scholarship(x, policy)}

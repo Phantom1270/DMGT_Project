@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -8,7 +8,52 @@
       name="description"
       content="Explore dependency planning, course paths and Boolean decision systems in DiscreteLab."
     />
-    <title>DiscreteLab — Interactive Mathematics</title>
+    <meta name="theme-color" content="#0a0e1a" />
+    <meta
+      property="og:title"
+      content="DiscreteLab — Mathematical Observatory"
+    />
+    <meta
+      property="og:description"
+      content="Explore five interactive laboratories in lattices, graphs and Boolean algebra."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link
+      rel="preload"
+      href="/fonts/inter.woff"
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
+    <script>
+      try {
+        const mode = localStorage.getItem("discretelab-theme");
+        document.documentElement.dataset.theme =
+          mode === "light" ||
+          (mode === "system" &&
+            matchMedia("(prefers-color-scheme:light)").matches)
+            ? "light"
+            : "dark";
+      } catch {}
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LearningResource",
+        "name": "DiscreteLab",
+        "educationalLevel": "Undergraduate",
+        "learningResourceType": "Interactive laboratory",
+        "teaches": [
+          "Lattices",
+          "Boolean algebra",
+          "Partial orders",
+          "Critical paths",
+          "Truth tables"
+        ]
+      }
+    </script>
+    <title>DiscreteLab — Mathematical Observatory</title>
   </head>
   <body>
     <div id="root"></div>

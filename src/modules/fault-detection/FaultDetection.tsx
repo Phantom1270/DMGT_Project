@@ -1,16 +1,19 @@
-import { useLabState } from "../lib/useLabState";
-import { useEffect, useEffectEvent, useState } from "react";
-import { fault } from "../lib/analysis";
-import { BooleanCircuit } from "../components/BooleanCircuit";
-import { inputGate, gate } from "../lib/circuit";
+import { MathFormula } from "../../components/Math";
+import { KarnaughMap } from "../../components/KarnaughMap";
+import { MAX_EVENTS } from "../../lib/constants";
+import { useLabState } from "../../lib/useLabState";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { fault } from "../../lib/analysis";
+import { BooleanCircuit } from "../../components/BooleanCircuit";
+import { inputGate, gate } from "../../lib/circuit";
 import {
   Demo,
   Check,
   Explanation,
   NumberInput,
   Panel,
-} from "../components/Lab";
-import { generateTruthTable } from "../lib/booleanLogic";
+} from "../../components/Lab";
+import { generateTruthTable } from "../../lib/booleanLogic";
 const normal = { temperature: 70, vibration: 5, cooling: false };
 const sequence = [
   normal,
@@ -92,22 +95,31 @@ export default function Fault() {
       limits.vibration >= 0 &&
       nextLimits.vibration >= 0;
     if (messages.length && validTransition)
-      setEvents((previous) => [...previous, ...messages].slice(-50));
+      setEvents((previous) => [...previous, ...messages].slice(-MAX_EVENTS));
     set(next);
     setLimits(nextLimits);
   };
-  const advance = useEffectEvent(() => {
-    change(sequence[frame]);
-    if (frame === sequence.length - 1) {
-      setFrame(0);
-      setRunning(false);
-    } else setFrame(frame + 1);
+  const advanceRef = useRef<() => void>(() => undefined);
+  useEffect(() => {
+    advanceRef.current = () => {
+      change(sequence[frame]);
+      if (frame === sequence.length - 1) {
+        setFrame(0);
+        setRunning(false);
+      } else setFrame(frame + 1);
+    };
   });
+  const advance = useCallback(() => advanceRef.current(), []);
   useEffect(() => {
     if (!running) return;
-    const timer = window.setTimeout(() => advance(), speed);
+    const timer = window.setTimeout(advance, speed);
     return () => clearTimeout(timer);
-  }, [running, frame, speed]);
+  }, [running, frame, speed, advance]);
+  useEffect(() => {
+    const listener = () => setRunning((value) => !value);
+    window.addEventListener("lab:playback", listener);
+    return () => window.removeEventListener("lab:playback", listener);
+  }, []);
   const rows = generateTruthTable(["T", "V", "C"], (x) => ({
       original: Boolean((x.T && x.V) || (x.T && x.C)),
       simplified: Boolean(x.T && (x.V || x.C)),
@@ -346,6 +358,12 @@ export default function Fault() {
             </p>
           </Explanation>
           <Panel title="Exhaustive equivalence">
+            <MathFormula block expression="F=TV+TC=T(V+C)" />
+            <KarnaughMap
+              variables={["T", "V", "C"]}
+              evaluate={(bits) => (bits[0] && bits[1]) || (bits[0] && bits[2])}
+              current={[t, v, c]}
+            />
             <p>
               {rows.length} combinations tested · {mismatches} mismatches ·{" "}
               {mismatches === 0

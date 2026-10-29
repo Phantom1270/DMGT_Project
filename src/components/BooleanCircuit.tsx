@@ -1,3 +1,4 @@
+import { useReducedMotionPreference } from "../lib/useReducedMotionPreference";
 import { useState } from "react";
 import type { Gate } from "../lib/circuit";
 export function BooleanCircuit({
@@ -7,6 +8,7 @@ export function BooleanCircuit({
   gates: Gate[];
   title: string;
 }) {
+  const reduced = useReducedMotionPreference();
   const [selected, setSelected] = useState<string | null>(null);
   const levels: Record<string, number> = {};
   for (const gate of gates)
@@ -39,13 +41,29 @@ export function BooleanCircuit({
                 to = positions[g.id],
                 active = gates.find((n) => n.id === source)!.value;
               return (
-                <path
-                  key={`${source}-${g.id}`}
-                  d={`M ${from.x + 125} ${from.y + 24} H ${to.x - 20} V ${to.y + 24} H ${to.x}`}
-                  fill="none"
-                  stroke={active ? "#467a48" : "#bdc5bb"}
-                  strokeWidth="2"
-                />
+                <g key={`${source}-${g.id}`}>
+                  <path
+                    className={`wire ${active ? "active" : ""}`}
+                    key={`${source}-${g.id}`}
+                    d={`M ${from.x + 125} ${from.y + 24} H ${to.x - 20} V ${to.y + 24} H ${to.x}`}
+                    fill="none"
+                    stroke={active ? "#467a48" : "#bdc5bb"}
+                    strokeWidth="2"
+                  />
+                  {active && !reduced && (
+                    <circle
+                      className="signal-dot"
+                      r="2.6"
+                      key={`${source}-${g.id}-${Number(g.value)}`}
+                    >
+                      <animateMotion
+                        dur="1.5s"
+                        repeatCount="2"
+                        path={`M ${from.x + 125} ${from.y + 24} H ${to.x - 20} V ${to.y + 24} H ${to.x}`}
+                      />
+                    </circle>
+                  )}
+                </g>
               );
             }),
           )}
@@ -54,12 +72,10 @@ export function BooleanCircuit({
             return (
               <g
                 key={g.id}
+                className={`gate ${g.value ? "active" : ""}`}
                 transform={`translate(${p.x},${p.y})`}
                 role={g.kind === "input" ? undefined : "button"}
                 tabIndex={g.kind === "input" ? undefined : 0}
-                aria-label={
-                  g.kind === "input" ? undefined : `Inspect ${g.label} gate`
-                }
                 onClick={() => {
                   if (g.kind !== "input") setSelected(g.id);
                 }}
@@ -85,7 +101,12 @@ export function BooleanCircuit({
                   {g.label}
                 </text>
                 <text x="62" y="37" textAnchor="middle">
-                  {g.kind === "input" ? "Input" : g.kind} = {Number(g.value)}
+                  {g.kind === "input"
+                    ? "Input"
+                    : g.kind === "AND"
+                      ? "∧ AND"
+                      : "∨ OR"}{" "}
+                  = {Number(g.value)}
                 </text>
               </g>
             );
@@ -102,7 +123,7 @@ export function BooleanCircuit({
           ))}
       </div>
       {current && (
-        <p>
+        <p role="status">
           {current.kind} gate:{" "}
           {current.sources
             .map((id) => Number(gates.find((g) => g.id === id)!.value))

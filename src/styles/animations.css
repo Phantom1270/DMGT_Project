@@ -1,0 +1,93 @@
+@keyframes wire-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+@keyframes skeleton-scan {
+  to {
+    background-position: -200% 0;
+  }
+}
+@keyframes critical-breath {
+  50% {
+    outline-color: color-mix(in srgb, var(--accent-warning) 50%, transparent);
+  }
+}
+@keyframes graph-step {
+  50% {
+    box-shadow:
+      0 0 0 7px #06b6d41a,
+      0 4px 25px #06b6d426;
+  }
+}
+.wire.active {
+  animation: wire-flow 1.8s linear 2;
+}
+.skeleton {
+  animation: skeleton-scan 1.7s ease-in-out infinite;
+}
+.graph-node.critical {
+  animation: critical-breath 2.3s ease-in-out 2;
+}
+.graph-node.walking {
+  animation: graph-step 1.2s ease-in-out 2;
+}
+.kmap-grid > button {
+  transition:
+    background 0.2s,
+    outline-color 0.2s;
+}
+.signal-dot {
+  opacity: 0.9;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .signal-dot {
+    display: none;
+  }
+}
+.lab-navigation a {
+  position: relative;
+  isolation: isolate;
+}
+.lab-navigation a.active {
+  background: transparent;
+  box-shadow: none;
+}
+.lab-navigation .nav-selection {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in srgb, var(--accent-primary) 9%, var(--bg-secondary));
+  box-shadow: inset 0 0 0 1px
+    color-mix(in srgb, var(--accent-primary) 25%, transparent);
+  border-radius: 8px;
+  display: block !important;
+}
+.graph-wrap .react-flow__node {
+  transition: transform 0.25s ease;
+}
+body,
+.panel,
+.explanation,
+.truth,
+.app-header,
+.lab-navigation,
+.device,
+.banner {
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+.circuit .gate rect {
+  transition:
+    fill 0.2s,
+    stroke 0.2s;
+}

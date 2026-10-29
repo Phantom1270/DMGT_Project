@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useEffect, useState, type ReactNode } from "react";
 export function Panel({
   title,
@@ -80,6 +81,28 @@ export function Demo({
   onStart: () => void;
 }) {
   const [step, setStep] = useState<number | null>(null);
+  useEffect(() => {
+    if (step === null) return;
+    const targets: Record<string, string[]> = {
+      tasks: [".graph-wrap", ".editor", ".stats"],
+      courses: [
+        ".lab-grid aside .panel:nth-child(2)",
+        ".lab-grid aside .panel:nth-child(2)",
+        ".semester-scroll",
+      ],
+      home: [".device", ".actions", ".circuit"],
+      scholarship: [
+        ".condition-list",
+        ".number-field",
+        ".comparison,.condition-list",
+      ],
+      fault: [".gauge", ".gauge", ".circuit"],
+    };
+    const selector = targets[location.pathname.slice(1)]?.[step];
+    const target = selector ? document.querySelector(selector) : null;
+    target?.classList.add("demo-target");
+    return () => target?.classList.remove("demo-target");
+  }, [step]);
   return (
     <div className="demo">
       <button
@@ -130,7 +153,10 @@ export function TruthTable({
         Explore truth table ({2 ** variables.length} combinations)
       </summary>
       <div className="table-scroll">
-        <table>
+        <table aria-label="Boolean truth table">
+          <caption>
+            Computed values; the highlighted row matches current inputs.
+          </caption>
           <thead>
             <tr>
               {variables.map((v) => (
@@ -153,9 +179,19 @@ export function TruthTable({
                   }
                 >
                   {bits.map((b, i) => (
-                    <td key={i}>{Number(b)}</td>
+                    <td key={i}>
+                      <span className={`bit ${b ? "true" : "false"}`}>
+                        {Number(b)}
+                      </span>
+                    </td>
                   ))}
-                  <td>{Number(evaluate(bits))}</td>
+                  <td>
+                    <span
+                      className={`bit ${evaluate(bits) ? "true" : "false"}`}
+                    >
+                      {Number(evaluate(bits))}
+                    </span>
+                  </td>
                   <td>
                     <button onClick={() => setInspect(row)}>
                       Inspect row {row + 1}
@@ -173,7 +209,7 @@ export function TruthTable({
         </table>
       </div>
       {inspect !== null && (
-        <p>
+        <p aria-live="polite">
           Inspected row {inspect + 1}:{" "}
           {variables
             .map(
@@ -208,6 +244,15 @@ export function Playback({
 }) {
   const [index, setIndex] = useState(-1),
     [playing, setPlaying] = useState(false);
+  const frameRef = useRef(onFrame);
+  useEffect(() => {
+    frameRef.current = onFrame;
+  }, [onFrame]);
+  useEffect(() => {
+    const listener = () => setPlaying((value) => !value);
+    window.addEventListener("lab:playback", listener);
+    return () => window.removeEventListener("lab:playback", listener);
+  }, []);
   useEffect(() => {
     if (!playing) return;
     const timer = window.setTimeout(() => {
@@ -217,10 +262,10 @@ export function Playback({
         return;
       }
       setIndex(next);
-      onFrame(next);
+      frameRef.current(next);
     }, speed);
     return () => clearTimeout(timer);
-  }, [playing, index, length, speed, onFrame]);
+  }, [playing, index, length, speed]);
   return (
     <div className="actions">
       <button

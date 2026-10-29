@@ -1,8 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Background,
   Controls,
+  MiniMap,
   ReactFlow,
+  useReactFlow,
+  useNodesInitialized,
   type Edge,
   type Node,
 } from "@xyflow/react";
@@ -19,6 +22,23 @@ type Item = DependencyNode & {
   name: string;
   status: "Completed" | "Ready" | "Blocked";
 };
+function AutoFit({ signature }: { signature: string }) {
+  const { fitView } = useReactFlow(),
+    initialized = useNodesInitialized();
+  useEffect(() => {
+    if (!initialized) return;
+    const fit = () => {
+      void fitView({ padding: 0.18, duration: 0 });
+    };
+    const frame = requestAnimationFrame(fit);
+    window.addEventListener("resize", fit);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", fit);
+    };
+  }, [signature, initialized, fitView]);
+  return null;
+}
 const layout = (items: Item[], hasse: boolean) => {
   const graph = new dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
   graph.setGraph({
@@ -59,6 +79,7 @@ export function DependencyGraph({
   criticalEdges?: Array<[string, string]>;
   activeIds?: string[];
 }) {
+  const [zoom, setZoom] = useState(100);
   const [hasse, setHasse] = useState(true);
   const [localSelected, setSelected] = useState<string | null>(null);
   const selected = selectedId ?? localSelected;
@@ -107,8 +128,8 @@ export function DependencyGraph({
       style: {
         stroke:
           selected && connected.has(from) && connected.has(to)
-            ? "#578753"
-            : "#aab4a5",
+            ? "var(--accent-primary)"
+            : "var(--text-tertiary)",
         strokeWidth:
           selected && connected.has(from) && connected.has(to) ? 2.5 : 1.5,
       },
@@ -140,10 +161,10 @@ export function DependencyGraph({
         </div>
       </div>
       <div className="flow-canvas">
+        <span className="zoom-indicator" aria-label="Graph zoom">
+          {zoom}%
+        </span>
         <ReactFlow
-          key={items
-            .map((x) => `${x.id}:${x.prerequisites.join(",")}`)
-            .join("|")}
           nodes={nodes}
           edges={edges.map((edge) => ({
             ...edge,
@@ -153,12 +174,12 @@ export function DependencyGraph({
               stroke: cycle?.some(
                 (id, i) => id === edge.target && cycle[i + 1] === edge.source,
               )
-                ? "#bf493b"
+                ? "var(--accent-danger)"
                 : criticalEdges.some(
                       ([from, to]) =>
                         from === edge.source && to === edge.target,
                     )
-                  ? "#ae673c"
+                  ? "var(--accent-warning)"
                   : edge.style?.stroke,
               strokeDasharray:
                 selected && edge.source !== selected && edge.target !== selected
@@ -180,9 +201,26 @@ export function DependencyGraph({
           }}
           nodesDraggable={false}
           nodesConnectable={false}
-          proOptions={{ hideAttribution: true }}
+          onMove={(_, viewport) => setZoom(Math.round(viewport.zoom * 100))}
         >
-          <Background color="#e8ece5" gap={22} />
+          <AutoFit
+            signature={items
+              .map((x) => `${x.id}:${x.prerequisites.join(",")}`)
+              .join("|")}
+          />
+          <Background color="var(--grid)" gap={22} />
+          <MiniMap
+            pannable
+            zoomable
+            nodeColor={(node) =>
+              criticalIds.includes(node.id)
+                ? "#f59e0b"
+                : items.find((x) => x.id === node.id)?.status === "Completed"
+                  ? "#10b981"
+                  : "#06b6d4"
+            }
+            maskColor="rgba(10,14,26,.2)"
+          />
           <Controls showInteractive={false} />
         </ReactFlow>
       </div>

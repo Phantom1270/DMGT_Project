@@ -1,8 +1,9 @@
-import { useLabState } from "../lib/useLabState";
+import { MathFormula } from "../../components/Math";
+import { useLabState } from "../../lib/useLabState";
 import { useState } from "react";
-import { home } from "../lib/analysis";
-import { BooleanCircuit } from "../components/BooleanCircuit";
-import { inputGate, gate } from "../lib/circuit";
+import { home } from "../../lib/analysis";
+import { BooleanCircuit } from "../../components/BooleanCircuit";
+import { inputGate, gate } from "../../lib/circuit";
 import {
   Demo,
   Check,
@@ -11,7 +12,7 @@ import {
   Panel,
   Playback,
   TruthTable,
-} from "../components/Lab";
+} from "../../components/Lab";
 const sample = {
   brightness: 20,
   temperature: 30,
@@ -193,6 +194,10 @@ export default function SmartHome() {
         </aside>
         <div className="stack">
           <Panel title="Live home decisions">
+            <MathFormula
+              block
+              expression={String.raw`L=(P\land D)\lor M,\quad AC=P\land H,\quad Alarm=S\land O`}
+            />
             {!valid ? (
               <p role="alert">
                 Enter finite readings and brightness thresholds between 0 and
@@ -201,7 +206,11 @@ export default function SmartHome() {
             ) : (
               <>
                 {Object.entries(output).map(([name, on]) => (
-                  <div className={`device ${on ? "active" : ""}`} key={name}>
+                  <div
+                    role="status"
+                    className={`device ${on ? "active" : ""}`}
+                    key={name}
+                  >
                     <b>
                       {name === "ac"
                         ? "Air conditioner"
