@@ -59,10 +59,11 @@ export function TaskProofScene({ theme }: { theme: Theme }) {
             caption="Then, the schedule. The critical route takes four units; frontend has one unit of slack."
           />
         </div>
+        <p className="atlas-sample-note">
+          Same sample project. Dependency order becomes a four-unit schedule.
+          The parallel frontend has one unit of slack.
+        </p>
       </div>
-      <p className="atlas-sample-note">
-        Same sample project. Two ways to see its structure.
-      </p>
     </div>
   );
 }

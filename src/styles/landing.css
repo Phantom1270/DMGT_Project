@@ -53,6 +53,9 @@ body:has(.app-shell[data-page="overview"]) {
   text-decoration: underline;
   text-underline-offset: 6px;
 }
+.app-shell[data-page="overview"] .lab-navigation a > span:not(.nav-selection) {
+  display: inline;
+}
 .app-shell[data-page="overview"] .overview-workspace {
   padding-top: 12px;
 }
@@ -176,7 +179,7 @@ body:has(.app-shell[data-page="overview"]) {
 }
 .atlas-lattice {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   grid-template-rows: auto 1fr;
   margin: 0;
   background: var(--bg-secondary);
@@ -378,6 +381,9 @@ body:has(.app-shell[data-page="overview"]) {
 .atlas-task-proof {
   min-width: 0;
 }
+.atlas-task-stage > .atlas-sample-note {
+  grid-column: 1 / -1;
+}
 .atlas-scene-enhanced {
   min-height: calc(100svh + 240px);
   position: relative;
@@ -387,6 +393,7 @@ body:has(.app-shell[data-page="overview"]) {
   top: 96px;
   height: min(60svh, 540px);
   grid-template-columns: 1fr;
+  grid-template-rows: minmax(0, 1fr) auto;
 }
 .atlas-scene-enhanced .atlas-task-stage > div {
   grid-area: 1/1;
@@ -405,11 +412,11 @@ body:has(.app-shell[data-page="overview"]) {
   height: 100%;
 }
 .atlas-scene-enhanced .atlas-figure figcaption {
-  min-height: 64px;
+  display: none;
 }
-.atlas-scene-enhanced > .atlas-sample-note {
-  position: absolute;
-  bottom: 0;
+.atlas-scene-enhanced .atlas-sample-note {
+  grid-area: 2 / 1;
+  align-self: start;
 }
 .atlas-entry-tasks:has(.atlas-scene-enhanced) > .atlas-entry-copy {
   position: sticky;
@@ -479,6 +486,13 @@ body:has(.app-shell[data-page="overview"]) {
   }
   .atlas-intro {
     grid-template-columns: 1fr 1fr;
+  }
+  .atlas-intro h1 {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .atlas-summary {
+    grid-row: 2;
   }
   .atlas h1 {
     font-size: 5.142857rem;

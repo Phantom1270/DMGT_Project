@@ -6,9 +6,9 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--stage', choices=['static', 'chrome', 'motion', 'full'], default='full')
+parser.add_argument('--stage', choices=['static', 'chrome', 'motion', 'responsive', 'full'], default='full')
 args = parser.parse_args()
-BASE = os.environ.get('DISCRETELAB_TEST_URL', 'http://127.0.0.1:5182')
+BASE = os.environ.get('DISCRETELAB_TEST_URL', 'http://127.0.0.1:5180')
 LABS = ['tasks', 'courses', 'home', 'scholarship', 'fault']
 OUT = Path('.tmp/atlas/screens')
 OUT.mkdir(parents=True, exist_ok=True)
@@ -56,6 +56,23 @@ with sync_playwright() as p:
         page.go_back()
         expect(page).to_have_url(BASE + '/')
         print('PASS named phone navigation, system theme, native Space, shortcuts and route focus')
+
+    if args.stage in ['responsive', 'full']:
+        responsive_failures = []
+        for width in [768, 1100, 1200]:
+            page.set_viewport_size({'width':width, 'height':900})
+            page.goto(BASE)
+            page.wait_for_load_state('networkidle')
+            for label in ['Overview','Task planner','Course eligibility','Smart home','Scholarship','Fault detection']:
+                text = page.get_by_role('navigation').get_by_role('link', name=label, exact=True).locator('span').last
+                if not text.is_visible(): responsive_failures.append(f'{width}px: hidden {label} label')
+            title_lines = page.locator('h1').evaluate('(e)=>{const r=document.createRange();r.selectNodeContents(e);return r.getClientRects().length}')
+            if title_lines != 1: responsive_failures.append(f'{width}px: split product name')
+            for button in page.locator('.lattice-controls button').all():
+                clear = button.evaluate('''button=>{const r=button.getBoundingClientRect();return document.elementFromPoint(r.right-3,r.y+r.height/2)?.closest('button')===button}''')
+                if not clear: responsive_failures.append(f'{width}px: intercepted {button.inner_text()} input edge')
+        assert not responsive_failures, responsive_failures
+        print('PASS exact tablet breakpoint, intact product title and non-overlapping inputs at intermediate widths')
 
     if args.stage == 'full':
         for theme in ['dark', 'light']:
@@ -106,11 +123,17 @@ with sync_playwright() as p:
         motion.goto(BASE)
         scene = motion.locator('.atlas-task-proof')
         expect(scene).to_have_attribute('data-enhanced', 'true', timeout=10000)
+        assert scene.locator('.atlas-task-stage > .atlas-sample-note').count() == 1, 'Explanatory caption must stay outside the crossfading layers'
         top = scene.evaluate('(element)=>element.getBoundingClientRect().top+scrollY')-96
+        caption_y = None
         for progress in [0,.25,.5,.75,1]:
             motion.evaluate('(y)=>scrollTo(0,y)', top+240*progress)
             motion.wait_for_timeout(150)
             assert motion.evaluate('document.documentElement.scrollWidth <= innerWidth'), 'Enhanced scene overflow'
+            caption = scene.locator('.atlas-task-stage > .atlas-sample-note')
+            assert caption.evaluate('(element)=>getComputedStyle(element).opacity') == '1'
+            if progress == 0: caption_y = caption.bounding_box()['y']
+            if progress == 1: assert abs(caption.bounding_box()['y']-caption_y) < 1, 'Explanatory caption must stay fixed during the transition'
             if progress == 1:
                 assert float(motion.locator('.atlas-task-gantt').evaluate('(e)=>getComputedStyle(e).opacity')) > .99
             motion.screenshot(path=str(OUT/f'scene-{progress}.png'))

@@ -7,7 +7,7 @@ from pathlib import Path
 from PIL import Image, ImageOps, ImageDraw
 from playwright.sync_api import sync_playwright, expect
 
-BASE = os.environ.get('DISCRETELAB_TEST_URL', 'http://127.0.0.1:5181')
+BASE = os.environ.get('DISCRETELAB_TEST_URL', 'http://127.0.0.1:5180')
 DEST = Path('public/images/landing')
 DEST.mkdir(parents=True, exist_ok=True)
 OUT = Path('.tmp/atlas')
