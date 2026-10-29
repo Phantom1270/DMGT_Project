@@ -1,0 +1,450 @@
+{
+  "captureRevision": "c8fb781e15883a640d539139fadd0f594c53054f",
+  "source": "http://127.0.0.1:5181",
+  "assets": [
+    {
+      "stem": "tasks-graph",
+      "theme": "dark",
+      "route": "/tasks",
+      "inputs": {
+        "durations": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "duration": 4
+      },
+      "cssBounds": {
+        "x": 481,
+        "y": 590.375,
+        "width": 870,
+        "height": 510
+      },
+      "pixelCrop": [
+        451,
+        28,
+        1288,
+        992
+      ],
+      "sizes": {
+        "640": {
+          "width": 640,
+          "height": 737,
+          "bytes": 16674
+        },
+        "1280": {
+          "width": 1280,
+          "height": 1474,
+          "bytes": 34834
+        }
+      }
+    },
+    {
+      "stem": "tasks-gantt",
+      "theme": "dark",
+      "route": "/tasks",
+      "inputs": {
+        "durations": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "duration": 4,
+        "frontendSlack": 1
+      },
+      "cssBounds": {
+        "x": 480,
+        "y": 656.375,
+        "width": 872,
+        "height": 317
+      },
+      "pixelCrop": [
+        0,
+        0,
+        1744,
+        636
+      ],
+      "sizes": {
+        "640": {
+          "width": 640,
+          "height": 233,
+          "bytes": 4576
+        },
+        "1280": {
+          "width": 1280,
+          "height": 467,
+          "bytes": 9980
+        }
+      }
+    },
+    {
+      "stem": "courses-timeline",
+      "theme": "dark",
+      "route": "/courses",
+      "inputs": {
+        "target": "l",
+        "capacity": 3,
+        "completed": []
+      },
+      "cssBounds": {
+        "x": 320,
+        "y": 410.046875,
+        "width": 1120,
+        "height": 280
+      },
+      "pixelCrop": [
+        0,
+        0,
+        2240,
+        562
+      ],
+      "sizes": {
+        "640": {
+          "width": 640,
+          "height": 161,
+          "bytes": 4846
+        },
+        "1280": {
+          "width": 1280,
+          "height": 321,
+          "bytes": 12852
+        }
+      }
+    },
+    {
+      "stem": "home-circuit",
+      "theme": "dark",
+      "route": "/home",
+      "inputs": {
+        "brightness": 20,
+        "temperature": 30,
+        "presence": true,
+        "manual": false
+      },
+      "cssBounds": {
+        "x": 480,
+        "y": 670.9375,
+        "width": 872,
+        "height": 428.59375
+      },
+      "pixelCrop": [
+        0,
+        0,
+        1744,
+        860
+      ],
+      "sizes": {
+        "640": {
+          "width": 640,
+          "height": 316,
+          "bytes": 5130
+        },
+        "1280": {
+          "width": 1280,
+          "height": 631,
+          "bytes": 14566
+        }
+      }
+    },
+    {
+      "stem": "scholarship-policy",
+      "theme": "dark",
+      "route": "/scholarship",
+      "inputs": {
+        "cgpa": 8.4,
+        "income": 300000,
+        "attendance": 75,
+        "achievement": false,
+        "policy": "balanced"
+      },
+      "cssBounds": {
+        "x": 480,
+        "y": 671.46875,
+        "width": 872,
+        "height": 428.59375
+      },
+      "pixelCrop": [
+        0,
+        0,
+        1744,
+        860
+      ],
+      "sizes": {
+        "640": {
+          "width": 640,
+          "height": 316,
+          "bytes": 5148
+        },
+        "1280": {
+          "width": 1280,
+          "height": 631,
+          "bytes": 15858
+        }
+      }
+    },
+    {
+      "stem": "fault-equivalence",
+      "theme": "dark",
+      "route": "/fault",
+      "inputs": {
+        "temperature": 95,
+        "vibration": 12,
+        "cooling": true,
+        "limits": [
+          80,
+          10
+        ]
+      },
+      "cssBounds": {
+        "x": 480,
+        "y": 388.140625,
+        "width": 872,
+        "height": 374
+      },
+      "pixelCrop": [
+        0,
+        0,
+        1744,
+        750
+      ],
+      "sizes": {
+        "640": {
+          "width": 640,
+          "height": 275,
+          "bytes": 3386
+        },
+        "1280": {
+          "width": 1280,
+          "height": 550,
+          "bytes": 7364
+        }
+      }
+    },
+    {
+      "stem": "tasks-graph",
+      "theme": "light",
+      "route": "/tasks",
+      "inputs": {
+        "durations": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "duration": 4
+      },
+      "cssBounds": {
+        "x": 481,
+        "y": 590.375,
+        "width": 870,
+        "height": 510
+      },
+      "pixelCrop": [
+        451,
+        28,
+        1288,
+        992
+      ],
+      "sizes": {
+        "640": {
+          "width": 640,
+          "height": 737,
+          "bytes": 16210
+        },
+        "1280": {
+          "width": 1280,
+          "height": 1474,
+          "bytes": 34208
+        }
+      }
+    },
+    {
+      "stem": "tasks-gantt",
+      "theme": "light",
+      "route": "/tasks",
+      "inputs": {
+        "durations": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "duration": 4,
+        "frontendSlack": 1
+      },
+      "cssBounds": {
+        "x": 480,
+        "y": 656.375,
+        "width": 872,
+        "height": 317
+      },
+      "pixelCrop": [
+        0,
+        0,
+        1744,
+        636
+      ],
+      "sizes": {
+        "640": {
+          "width": 640,
+          "height": 233,
+          "bytes": 4278
+        },
+        "1280": {
+          "width": 1280,
+          "height": 467,
+          "bytes": 10642
+        }
+      }
+    },
+    {
+      "stem": "courses-timeline",
+      "theme": "light",
+      "route": "/courses",
+      "inputs": {
+        "target": "l",
+        "capacity": 3,
+        "completed": []
+      },
+      "cssBounds": {
+        "x": 320,
+        "y": 410.046875,
+        "width": 1120,
+        "height": 280
+      },
+      "pixelCrop": [
+        0,
+        0,
+        2240,
+        562
+      ],
+      "sizes": {
+        "640": {
+          "width": 640,
+          "height": 161,
+          "bytes": 4750
+        },
+        "1280": {
+          "width": 1280,
+          "height": 321,
+          "bytes": 12908
+        }
+      }
+    },
+    {
+      "stem": "home-circuit",
+      "theme": "light",
+      "route": "/home",
+      "inputs": {
+        "brightness": 20,
+        "temperature": 30,
+        "presence": true,
+        "manual": false
+      },
+      "cssBounds": {
+        "x": 480,
+        "y": 670.9375,
+        "width": 872,
+        "height": 428.59375
+      },
+      "pixelCrop": [
+        0,
+        0,
+        1744,
+        860
+      ],
+      "sizes": {
+        "640": {
+          "width": 640,
+          "height": 316,
+          "bytes": 4872
+        },
+        "1280": {
+          "width": 1280,
+          "height": 631,
+          "bytes": 14038
+        }
+      }
+    },
+    {
+      "stem": "scholarship-policy",
+      "theme": "light",
+      "route": "/scholarship",
+      "inputs": {
+        "cgpa": 8.4,
+        "income": 300000,
+        "attendance": 75,
+        "achievement": false,
+        "policy": "balanced"
+      },
+      "cssBounds": {
+        "x": 480,
+        "y": 671.46875,
+        "width": 872,
+        "height": 428.59375
+      },
+      "pixelCrop": [
+        0,
+        0,
+        1744,
+        860
+      ],
+      "sizes": {
+        "640": {
+          "width": 640,
+          "height": 316,
+          "bytes": 4956
+        },
+        "1280": {
+          "width": 1280,
+          "height": 631,
+          "bytes": 15460
+        }
+      }
+    },
+    {
+      "stem": "fault-equivalence",
+      "theme": "light",
+      "route": "/fault",
+      "inputs": {
+        "temperature": 95,
+        "vibration": 12,
+        "cooling": true,
+        "limits": [
+          80,
+          10
+        ]
+      },
+      "cssBounds": {
+        "x": 480,
+        "y": 388.140625,
+        "width": 872,
+        "height": 374
+      },
+      "pixelCrop": [
+        0,
+        0,
+        1744,
+        750
+      ],
+      "sizes": {
+        "640": {
+          "width": 640,
+          "height": 275,
+          "bytes": 3312
+        },
+        "1280": {
+          "width": 1280,
+          "height": 550,
+          "bytes": 7972
+        }
+      }
+    }
+  ]
+}

@@ -291,7 +291,7 @@ function Shell() {
               <ErrorBoundary>
                 <Suspense fallback={<Skeleton />}>
                   <Routes location={routeLocation}>
-                    <Route path="/" element={<Landing />} />
+                    <Route path="/" element={<Landing theme={theme} />} />
                     {modules.map((m) => (
                       <Route
                         key={m.id}
