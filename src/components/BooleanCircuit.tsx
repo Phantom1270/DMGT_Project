@@ -47,7 +47,7 @@ export function BooleanCircuit({
                     key={`${source}-${g.id}`}
                     d={`M ${from.x + 125} ${from.y + 24} H ${to.x - 20} V ${to.y + 24} H ${to.x}`}
                     fill="none"
-                    stroke={active ? "#467a48" : "#bdc5bb"}
+                    stroke={active ? "var(--accent-primary)" : "var(--border)"}
                     strokeWidth="2"
                   />
                   {active && !reduced && (
@@ -94,8 +94,12 @@ export function BooleanCircuit({
                   width="125"
                   height="48"
                   rx="8"
-                  fill={g.value ? "#e8f4e4" : "#f5f6f3"}
-                  stroke={g.value ? "#608b54" : "#c6ccc1"}
+                  fill={
+                    g.value
+                      ? "color-mix(in srgb, var(--accent-primary) 18%, var(--bg-secondary))"
+                      : "var(--bg-secondary)"
+                  }
+                  stroke={g.value ? "var(--accent-primary)" : "var(--border)"}
                 />
                 <text x="62" y="20" textAnchor="middle">
                   {g.label}

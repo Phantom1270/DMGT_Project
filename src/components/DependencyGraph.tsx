@@ -214,12 +214,12 @@ export function DependencyGraph({
             zoomable
             nodeColor={(node) =>
               criticalIds.includes(node.id)
-                ? "#f59e0b"
+                ? "var(--accent-secondary)"
                 : items.find((x) => x.id === node.id)?.status === "Completed"
-                  ? "#10b981"
-                  : "#06b6d4"
+                  ? "var(--accent-success)"
+                  : "var(--accent-primary)"
             }
-            maskColor="rgba(10,14,26,.2)"
+            maskColor="color-mix(in srgb,var(--bg-primary) 35%,transparent)"
           />
           <Controls showInteractive={false} />
         </ReactFlow>

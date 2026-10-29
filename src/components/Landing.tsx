@@ -66,7 +66,7 @@ export default function Landing() {
       <div className="landing-hero">
         <div>
           <div className="course-label">
-            <span /> An interactive mathematics observatory
+            <span /> An interactive mathematics atelier
           </div>
           <h1>
             DiscreteLab<span className="title-dot">.</span>
@@ -99,8 +99,12 @@ export default function Landing() {
           >
             <defs>
               <radialGradient id="lattice-aura">
-                <stop stopColor="#06b6d4" stopOpacity=".14" />
-                <stop offset="1" stopColor="#06b6d4" stopOpacity="0" />
+                <stop stopColor="var(--accent-primary)" stopOpacity=".14" />
+                <stop
+                  offset="1"
+                  stopColor="var(--accent-primary)"
+                  stopOpacity="0"
+                />
               </radialGradient>
             </defs>
             <circle cx="200" cy="150" r="145" fill="url(#lattice-aura)" />

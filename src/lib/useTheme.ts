@@ -26,7 +26,7 @@ export function useTheme() {
     document.documentElement.style.colorScheme = theme;
     document
       .querySelector("meta[name=theme-color]")
-      ?.setAttribute("content", theme === "dark" ? "#0a0e1a" : "#f8fafc");
+      ?.setAttribute("content", theme === "dark" ? "#151311" : "#fbf8f3");
     try {
       localStorage.setItem("discretelab-theme", mode);
     } catch {}

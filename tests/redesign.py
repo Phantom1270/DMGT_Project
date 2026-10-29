@@ -93,9 +93,16 @@ with sync_playwright() as p:
                 if actual!=theme:
                     page.get_by_role('button',name='Switch to '+theme+' mode',exact=True).click()
                 expect(page.locator('html')).to_have_attribute('data-theme',theme)
+                expected_bg='#151311' if theme=='dark' else '#fbf8f3'
+                expected_accent='#f59e0b' if theme=='dark' else '#c26910'
+                assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim()") == expected_bg
+                assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--accent-primary').trim()") == expected_accent
+                assert 'Newsreader' in page.locator('h1').evaluate('(element)=>getComputedStyle(element).fontFamily')
                 expect(page.locator('h1')).to_be_visible()
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),(theme,width,route,'horizontal overflow')
                 page.screenshot(path=f'tests/{theme}-{width}-{route or "overview"}.png',full_page=True)
+                if not route:
+                    page.screenshot(path=f'tests/warm-{theme}-{width}-overview.png',full_page=True)
             print('PASS theme/viewport matrix',theme,width)
     page.goto(BASE+'/missing-lab')
     expect(page.get_by_role('heading',name='This laboratory isn’t on the map.')).to_be_visible()

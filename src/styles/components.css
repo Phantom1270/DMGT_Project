@@ -11,7 +11,7 @@
 }
 .course-label {
   font-size: 10px;
-  color: var(--accent-primary);
+  color: var(--accent-ink);
   display: flex;
   gap: 8px;
   align-items: center;
@@ -28,14 +28,13 @@
 }
 .landing-hero h1 {
   font-size: clamp(56px, 5.6vw, 82px);
-  font-weight: 750;
+  font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1.05;
   margin: 0 0 18px;
 }
 .title-dot {
-  color: var(--accent-primary);
-  text-shadow: 0 0 32px #06b6d44d;
+  color: var(--accent-ink);
 }
 .hero-subtitle {
   font-size: 27px;
@@ -61,30 +60,37 @@
   text-decoration: none;
   font-size: 12px;
   font-weight: 650;
-  background: linear-gradient(115deg, #22d3ee, #38bdf8);
-  color: #05131e;
-  box-shadow: 0 6px 25px #06b6d41f;
+  background: var(--action-bg);
+  color: var(--on-accent);
+  box-shadow: var(--shadow);
   transition:
     transform 0.2s,
     box-shadow 0.2s;
 }
 .primary-link:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px #06b6d433;
+  box-shadow: 0 8px 28px
+    color-mix(in srgb, var(--accent-primary) 20%, transparent);
 }
 .hero-caption {
   font-size: 10px;
-  color: var(--text-tertiary);
+  color: var(--text-muted);
   margin-top: 18px;
 }
 .hero-experiment {
   position: relative;
   background:
-    radial-gradient(circle at 50% 40%, #06b6d407, transparent 70%), var(--glass);
+    radial-gradient(
+      circle at 50% 40%,
+      color-mix(in srgb, var(--accent-primary) 2.7%, transparent),
+      transparent 70%
+    ),
+    var(--glass);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 20px 22px;
-  box-shadow: 0 25px 70px -40px #06b6d430;
+  box-shadow: 0 25px 70px -40px
+    color-mix(in srgb, var(--accent-primary) 18.8%, transparent);
 }
 .hero-experiment::before {
   content: "";
@@ -141,7 +147,6 @@
 .lattice-point.active circle {
   fill: color-mix(in srgb, var(--accent-primary) 14%, var(--bg-secondary));
   stroke: var(--accent-primary);
-  filter: drop-shadow(0 3px 12px #06b6d43d);
 }
 .lattice-point.active text {
   fill: var(--accent-primary);
@@ -160,8 +165,8 @@
   background: var(--input-bg);
 }
 .lattice-controls button[aria-pressed="true"] {
-  color: var(--accent-primary);
-  border-color: #06b6d44d;
+  color: var(--accent-ink);
+  border-color: color-mix(in srgb, var(--accent-primary) 30.2%, transparent);
 }
 .lattice-controls > span {
   margin-left: auto;
@@ -178,7 +183,7 @@
 }
 .hero-experiment > p {
   font-size: 9px;
-  color: var(--text-tertiary);
+  color: var(--text-muted);
   text-align: center;
   margin: 13px 0 0;
 }
@@ -199,7 +204,7 @@
 }
 .section-heading > span {
   font: 10px var(--font-mono);
-  color: var(--text-tertiary);
+  color: var(--text-muted);
 }
 .module-cards {
   display: grid;
@@ -221,7 +226,7 @@
     background 0.2s;
 }
 .module-card:hover {
-  border-color: #06b6d466;
+  border-color: color-mix(in srgb, var(--accent-primary) 40%, transparent);
   transform: translateY(-4px);
   background: color-mix(in srgb, var(--accent-primary) 3%, var(--bg-secondary));
 }
@@ -233,27 +238,27 @@
 .catalog-icon {
   width: 38px;
   height: 38px;
-  border: 1px solid #06b6d42b;
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 16.9%, transparent);
   border-radius: 9px;
-  background: #06b6d40c;
+  background: color-mix(in srgb, var(--accent-primary) 4.7%, transparent);
   display: grid;
   place-items: center;
-  color: var(--accent-primary);
+  color: var(--accent-ink);
 }
 .module-courses .catalog-icon,
 .module-scholarship .catalog-icon {
   color: var(--accent-secondary);
-  background: #8b5cf60d;
-  border-color: #8b5cf633;
+  background: color-mix(in srgb, var(--accent-secondary) 5.1%, transparent);
+  border-color: color-mix(in srgb, var(--accent-secondary) 20%, transparent);
 }
 .module-fault .catalog-icon {
   color: var(--accent-warning);
-  background: #f59e0b0d;
-  border-color: #f59e0b33;
+  background: color-mix(in srgb, var(--accent-warning) 5.1%, transparent);
+  border-color: color-mix(in srgb, var(--accent-warning) 20%, transparent);
 }
 .catalog-index {
   font: 10px var(--font-mono);
-  color: var(--text-tertiary);
+  color: var(--text-muted);
 }
 .mini-preview {
   height: 77px;
@@ -281,7 +286,7 @@
 }
 .preview-formula {
   font: 16px var(--font-mono);
-  color: var(--accent-primary);
+  color: var(--accent-ink);
   letter-spacing: -0.025em;
 }
 .module-scholarship .preview-formula {
@@ -292,7 +297,7 @@
 }
 .card-concept {
   font-size: 9px;
-  color: var(--text-tertiary);
+  color: var(--text-muted);
 }
 .module-card h3 {
   font-size: 17px;
@@ -310,7 +315,7 @@
   justify-content: space-between;
   font-size: 11px;
   font-weight: 550;
-  color: var(--accent-primary);
+  color: var(--accent-ink);
 }
 .module-cards .module-card:nth-child(4),
 .module-cards .module-card:nth-child(5) {
@@ -321,7 +326,7 @@
   justify-content: space-between;
   gap: 15px;
   font-size: 10px;
-  color: var(--text-tertiary);
+  color: var(--text-muted);
   margin: 32px 0 8px;
   border-top: 1px solid var(--border);
   padding-top: 20px;
@@ -355,9 +360,9 @@
   background: var(--bg-secondary);
 }
 .graph-toolbar button.active {
-  border-color: #06b6d44d;
-  color: var(--accent-primary);
-  background: #06b6d40d;
+  border-color: color-mix(in srgb, var(--accent-primary) 30.2%, transparent);
+  color: var(--accent-ink);
+  background: color-mix(in srgb, var(--accent-primary) 5.1%, transparent);
 }
 .flow-canvas {
   height: 510px;
@@ -388,41 +393,38 @@
   display: block;
   font-size: 9px;
   margin-top: 6px;
-  color: var(--text-tertiary);
+  color: var(--text-muted);
 }
 .graph-node.ready {
-  background: linear-gradient(
-    140deg,
-    color-mix(in srgb, var(--accent-primary) 10%, var(--bg-secondary)),
+  background: color-mix(
+    in srgb,
+    var(--accent-primary) 12%,
     var(--bg-secondary)
   );
-  border-color: #06b6d466;
-  box-shadow: 0 4px 20px #06b6d410;
+  border-color: color-mix(in srgb, var(--accent-primary) 45%, var(--border));
 }
 .graph-node.completed {
-  background: linear-gradient(
-    140deg,
-    color-mix(in srgb, var(--accent-success) 10%, var(--bg-secondary)),
+  background: color-mix(
+    in srgb,
+    var(--accent-success) 12%,
     var(--bg-secondary)
   );
-  border-color: #10b98166;
+  border-color: color-mix(in srgb, var(--accent-success) 45%, var(--border));
 }
 .graph-node.critical {
-  outline: 1.5px solid var(--accent-warning);
+  outline: 1.5px solid var(--accent-secondary);
   outline-offset: 1px;
 }
 .graph-node.walking {
-  box-shadow:
-    0 0 0 4px #06b6d426,
-    0 4px 25px #06b6d42e;
+  box-shadow: var(--glow-warm);
   outline: 2px solid var(--accent-primary);
 }
 .graph-node.dimmed {
   opacity: 0.55;
 }
 .graph-wrap .react-flow__node.selected .graph-node {
-  border-color: var(--accent-primary);
-  box-shadow: var(--glow-cyan);
+  border-color: var(--accent-ink);
+  box-shadow: var(--glow-warm);
 }
 .graph-wrap .react-flow__controls {
   border: 1px solid var(--border);
@@ -449,11 +451,11 @@
   font-size: 8px;
 }
 .graph-wrap .react-flow__attribution a {
-  color: var(--text-tertiary);
+  color: var(--text-muted);
 }
 .graph-wrap .react-flow__handle {
   border-color: var(--bg-secondary);
-  background: var(--text-tertiary);
+  background: var(--text-muted);
   width: 4px;
   height: 4px;
 }
@@ -463,7 +465,7 @@
   flex-wrap: wrap;
   padding: 13px 15px;
   font-size: 10px;
-  color: var(--text-tertiary);
+  color: var(--text-muted);
   border-top: 1px solid var(--border);
 }
 .graph-legend span {
@@ -475,7 +477,7 @@
   height: 6px;
   width: 6px;
   border-radius: 50%;
-  background: var(--text-tertiary);
+  background: var(--text-muted);
 }
 .legend-dot.ready {
   background: var(--accent-primary);
@@ -548,28 +550,26 @@
 }
 .circuit text {
   font: 10px var(--font-mono);
-  fill: var(--text-secondary);
+  fill: var(--text-primary);
 }
 .circuit .wire {
-  stroke: color-mix(in srgb, var(--text-tertiary) 45%, transparent);
+  stroke: var(--border);
   stroke-width: 1.7;
 }
 .circuit .wire.active {
-  stroke: var(--accent-success);
-  stroke-dasharray: 5 7;
-  filter: drop-shadow(0 0 3px #10b98166);
+  stroke: var(--accent-primary);
+  stroke-dasharray: none;
 }
 .circuit .gate rect {
-  fill: var(--bg-tertiary);
+  fill: var(--bg-secondary);
   stroke: var(--border);
 }
 .circuit .gate.active rect {
-  fill: color-mix(in srgb, var(--accent-success) 9%, var(--bg-secondary));
-  stroke: color-mix(in srgb, var(--accent-success) 50%, var(--border));
-  filter: drop-shadow(0 3px 7px #10b9811c);
+  fill: color-mix(in srgb, var(--accent-primary) 18%, var(--bg-secondary));
+  stroke: var(--accent-primary);
 }
 .circuit .gate.active text {
-  fill: var(--accent-success);
+  fill: var(--text-primary);
 }
 .circuit .gate[role="button"]:hover rect,
 .circuit .gate[role="button"]:focus rect {
@@ -605,7 +605,7 @@
 }
 .device strong {
   font: 10px var(--font-mono);
-  color: var(--text-tertiary);
+  color: var(--text-muted);
   display: flex;
   gap: 7px;
   align-items: center;
@@ -615,18 +615,17 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--text-tertiary);
+  background: var(--text-muted);
 }
 .device.active {
-  border-color: #10b98140;
-  background: #10b98108;
+  border-color: color-mix(in srgb, var(--accent-success) 25.1%, transparent);
+  background: color-mix(in srgb, var(--accent-success) 3.1%, transparent);
 }
 .device.active strong {
   color: var(--accent-success);
 }
 .device.active strong::before {
   background: var(--accent-success);
-  box-shadow: 0 0 9px #10b98180;
 }
 .banner {
   border: 1px solid var(--border);
@@ -639,13 +638,21 @@
 }
 .banner.success {
   color: var(--accent-success);
-  background: linear-gradient(110deg, #10b98112, transparent);
-  border-color: #10b98140;
+  background: linear-gradient(
+    110deg,
+    color-mix(in srgb, var(--accent-success) 7.1%, transparent),
+    transparent
+  );
+  border-color: color-mix(in srgb, var(--accent-success) 25.1%, transparent);
 }
 .banner.failure {
-  color: var(--accent-danger);
-  background: linear-gradient(110deg, #ef444412, transparent);
-  border-color: #ef444440;
+  color: var(--danger-ink);
+  background: linear-gradient(
+    110deg,
+    color-mix(in srgb, var(--accent-danger) 7.1%, transparent),
+    transparent
+  );
+  border-color: color-mix(in srgb, var(--accent-danger) 25.1%, transparent);
 }
 .condition-list > div {
   display: flex;
@@ -658,7 +665,7 @@
 }
 .condition-list b {
   font: 9px var(--font-mono);
-  color: var(--accent-primary);
+  color: var(--accent-ink);
   white-space: nowrap;
   padding-top: 3px;
 }
@@ -677,7 +684,12 @@
 }
 .gauge-track > div {
   height: 100%;
-  background: linear-gradient(90deg, #10b981, #eab308 65%, #f43f5e);
+  background: linear-gradient(
+    90deg,
+    var(--accent-success),
+    var(--accent-warning) 65%,
+    var(--accent-danger)
+  );
   border-radius: 5px;
   transition: width 0.35s ease;
 }
@@ -687,7 +699,6 @@
   height: 22px;
   width: 2px;
   background: var(--accent-primary);
-  box-shadow: 0 0 8px #06b6d466;
 }
 .scenario-row {
   display: grid;
@@ -700,7 +711,7 @@
 }
 .scenario-row > span {
   font-size: 10px;
-  color: var(--text-tertiary);
+  color: var(--text-muted);
 }
 .event-list {
   padding-left: 20px;
@@ -721,9 +732,9 @@
   font-size: 11px;
 }
 .view-switch button[aria-pressed="true"] {
-  color: var(--accent-primary);
-  background: #06b6d414;
-  border-color: #06b6d440;
+  color: var(--accent-ink);
+  background: color-mix(in srgb, var(--accent-primary) 7.8%, transparent);
+  border-color: color-mix(in srgb, var(--accent-primary) 25.1%, transparent);
 }
 .gantt-scroll,
 .semester-scroll {
@@ -739,7 +750,7 @@
   justify-content: space-between;
   margin-left: 160px;
   font: 9px var(--font-mono);
-  color: var(--text-tertiary);
+  color: var(--text-muted);
   border-bottom: 1px solid var(--border);
   padding-bottom: 9px;
 }
@@ -771,7 +782,7 @@
     var(--bg-secondary)
   );
   border: 1px solid var(--accent-primary);
-  color: var(--accent-primary);
+  color: var(--accent-ink);
   font: 9px var(--font-mono);
   display: flex;
   align-items: center;
@@ -779,12 +790,12 @@
   min-width: 14px;
 }
 .gantt-bar.critical {
-  background: #f59e0b21;
+  background: color-mix(in srgb, var(--accent-warning) 12.9%, transparent);
   border-color: var(--accent-warning);
   color: var(--accent-warning);
 }
 .gantt-bar.completed {
-  background: #10b98121;
+  background: color-mix(in srgb, var(--accent-success) 12.9%, transparent);
   border-color: var(--accent-success);
   color: var(--accent-success);
 }
@@ -822,7 +833,7 @@
 .semester-course small {
   display: block;
   font-size: 9px;
-  color: var(--text-tertiary);
+  color: var(--text-muted);
   margin-top: 6px;
 }
 .kmap-grid {
@@ -844,11 +855,11 @@
 .kmap-grid > .axis {
   font-size: 9px;
   background: transparent;
-  color: var(--text-tertiary);
+  color: var(--text-muted);
 }
 .kmap-grid > .true {
-  border: 1px solid #10b98166;
-  background: #10b98114;
+  border: 1px solid color-mix(in srgb, var(--accent-success) 40%, transparent);
+  background: color-mix(in srgb, var(--accent-success) 7.8%, transparent);
   color: var(--accent-success);
 }
 .kmap-grid > .current {
@@ -1063,7 +1074,7 @@
 }
 .semester-node .semester-node-status {
   font: 9px var(--font-mono);
-  fill: var(--text-tertiary);
+  fill: var(--text-muted);
 }
 .semester-node.completed rect {
   fill: color-mix(in srgb, var(--accent-success) 8%, var(--bg-secondary));

@@ -92,7 +92,7 @@ function Shell() {
     document.title = current
       ? `${current.name} — DiscreteLab`
       : pathname === "/"
-        ? "DiscreteLab — Mathematical Observatory"
+        ? "DiscreteLab — Mathematical Atelier"
         : "Lab not found — DiscreteLab";
   }, [pathname, current]);
   const shared = useMemo(() => {

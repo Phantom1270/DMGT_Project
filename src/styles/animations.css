@@ -10,18 +10,16 @@
 }
 @keyframes critical-breath {
   50% {
-    outline-color: color-mix(in srgb, var(--accent-warning) 50%, transparent);
+    outline-color: color-mix(in srgb, var(--accent-secondary) 50%, transparent);
   }
 }
 @keyframes graph-step {
   50% {
-    box-shadow:
-      0 0 0 7px #06b6d41a,
-      0 4px 25px #06b6d426;
+    box-shadow: var(--glow-warm);
   }
 }
 .wire.active {
-  animation: wire-flow 1.8s linear 2;
+  animation: none;
 }
 .skeleton {
   animation: skeleton-scan 1.7s ease-in-out infinite;
