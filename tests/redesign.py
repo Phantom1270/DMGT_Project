@@ -21,7 +21,7 @@ with sync_playwright() as p:
     page.get_by_role('button',name='b = 0',exact=True).click()
     expect(page.get_by_role('button',name='b = 1',exact=True)).to_have_attribute('aria-pressed','true')
     page.screenshot(path='tests/overview-dark.png',full_page=True)
-    page.get_by_role('link',name='Task planner',exact=True).click()
+    page.get_by_role('navigation').get_by_role('link',name='Task planner',exact=True).click()
     expect(page.get_by_role('heading',name='Task dependency analysis')).to_be_focused()
     page.get_by_role('button',name='Gantt chart',exact=True).click()
     expect(page.locator('.gantt-bar')).to_have_count(5)

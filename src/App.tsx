@@ -160,7 +160,11 @@ function Shell() {
             ?.click();
           return;
         }
-        if (current && event.code === "Space" && !target.closest("button,a,summary")) {
+        if (
+          current &&
+          event.code === "Space" &&
+          !target.closest("button,a,summary")
+        ) {
           event.preventDefault();
           window.dispatchEvent(new Event("lab:playback"));
           return;
@@ -184,7 +188,10 @@ function Shell() {
     return () => window.removeEventListener("keydown", listener);
   }, [help, navigate, pathname, toggle, current]);
   return (
-    <div className="app-shell" data-page={pathname === "/" ? "overview" : "lab"}>
+    <div
+      className="app-shell"
+      data-page={pathname === "/" ? "overview" : "lab"}
+    >
       <a className="skip" href="#workspace">
         Skip to laboratory
       </a>
@@ -284,7 +291,11 @@ function Shell() {
             key={pathname}
             initial={reduced || pathname === "/" ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={reduced || pathname === "/" ? { opacity: 1 } : { opacity: 0, y: -5 }}
+            exit={
+              reduced || pathname === "/"
+                ? { opacity: 1 }
+                : { opacity: 0, y: -5 }
+            }
             transition={{ duration: 0.16 }}
           >
             <RouteFocus>
@@ -323,18 +334,29 @@ function Shell() {
         </AnimatePresence>
       </main>
       <footer>
-        {pathname === "/" ? <>
-          <Link to="/" className="atlas-footer-wordmark">DiscreteLab.</Link>
-          <div className="atlas-footer-notes"><p>Module 4 · Lattices &amp; Boolean algebra</p><p>Explore. Change. Understand.</p></div>
-        </> : <>
-        <span>
-          <FlaskConical size={14} /> DiscreteLab · An interactive mathematics
-          atelier
-        </span>
-        <span>
-          {known ? "Explore. Change. Understand." : "Choose a lab to begin."}
-        </span>
-        </>}
+        {pathname === "/" ? (
+          <>
+            <Link to="/" className="atlas-footer-wordmark">
+              DiscreteLab.
+            </Link>
+            <div className="atlas-footer-notes">
+              <p>Module 4 · Lattices &amp; Boolean algebra</p>
+              <p>Explore. Change. Understand.</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <span>
+              <FlaskConical size={14} /> DiscreteLab · An interactive
+              mathematics atelier
+            </span>
+            <span>
+              {known
+                ? "Explore. Change. Understand."
+                : "Choose a lab to begin."}
+            </span>
+          </>
+        )}
       </footer>
       <dialog
         ref={dialog}
