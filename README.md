@@ -14,7 +14,7 @@ An interactive mathematics lab demonstrating five real-world applications of Mod
 
 React 19, strict TypeScript, Vite, React Router, Zustand, `@xyflow/react`, Dagre, Framer Motion, KaTeX, and Lucide React. Client-side export uses html-to-image and jsPDF, loaded only when needed. Calculations run in the browser; no backend or external API is required.
 
-The Mathematical Atelier design starts with a live Boolean-lattice overview. All five labs support dark/light themes, responsive layouts, mathematical typesetting, guided highlights and keyboard controls. Graph, math and animation engines load separately so they do not block the first useful module content. Newsreader, Inter and JetBrains Mono are bundled locally with their font licenses.
+The Proof Atlas landing page presents a live Boolean lattice and authentic views of all five experiments in an editorial index. It keeps the Mathematical Atelier's espresso/amber and parchment/copper themes, with locally bundled Newsreader and Inter. JetBrains Mono remains in the labs. The overview's optional graph-to-schedule scene lazy-loads GSAP; reduced-motion, mobile, short-screen and failed-loading states retain static views. All five labs support responsive layouts, mathematical typesetting, guided highlights and keyboard controls. Graph, math and export engines load separately from the landing page.
 
 ## Navigation and presentation
 
@@ -27,7 +27,7 @@ The Mathematical Atelier design starts with a live Boolean-lattice overview. All
 
 Routes support refresh, links and browser back/forward. Unknown routes show a useful 404 screen. Production hosting must rewrite SPA paths to `index.html`; the GitHub repository itself is not a hosting deployment. Vite development/preview servers already provide the fallback.
 
-Use the header to toggle themes, follow the system theme or open shortcut help. Explicit theme preference persists locally; applicant inputs do not. `1–5` select a lab, `D` changes theme, `R` resets the active lab, Space plays/pauses a simulation, and Ctrl/⌘+Z or Y undo/redo task edits. Shortcuts do not intercept field editing.
+Use the header to toggle themes, follow the system theme or open shortcut help. Explicit theme preference persists locally; applicant inputs do not. `1–5` select a lab, `D` changes theme, `R` resets the active lab, Space plays/pauses a simulation inside a lab and scrolls the overview normally, and Ctrl/⌘+Z or Y undo/redo task edits. Shortcuts do not intercept field editing. Overview navigation keeps all six destination names visible on phones, with 44px or larger input targets.
 
 ## Export and share
 
@@ -67,9 +67,12 @@ npm run dev -- --host 127.0.0.1 --port 5180
 python tests/browser.py
 python tests/redesign.py
 python tests/warm-polish.py
+python tests/landing-design.py
 ```
 
-The original browser suite operates all five workflows. The redesign suite additionally checks routing, focus, browser history, Gantt selection, semester connections, K-map inspection, KaTeX, actual CSV/SVG/PNG/PDF downloads, shared-state restoration, invalid links, themes at 1440px/390px, keyboard shortcuts and reduced motion. It fails on unexpected console errors or warnings. Screenshots and Lighthouse reports are generated under `tests/` and ignored by Git. Set `DISCRETELAB_TEST_URL` to test a production preview on another port.
+The original browser suite operates all five workflows. The redesign suite additionally checks routing, focus, browser history, Gantt selection, semester connections, K-map inspection, KaTeX, actual CSV/SVG/PNG/PDF downloads, shared-state restoration, invalid links, themes at 1440px/390px, keyboard shortcuts and reduced motion. It fails on unexpected console errors or warnings. The atlas suite covers all lattice combinations, rapid input, keyboard access, two themes across six viewport sizes down to 320px, enlarged text, image/animation failures, delayed imports and reduced-motion changes. Set `DISCRETELAB_TEST_URL` to test a production preview on another port. Atlas QA captures live under ignored `.tmp/atlas/`; existing screenshots and Lighthouse reports under `tests/` are also ignored.
+
+To regenerate the 24 responsive product plates from isolated sample sessions, install Pillow alongside Playwright and run `python tests/landing-assets.py` against a running build. `public/images/landing/manifest.json` records source revision, routes, input fixtures and crop bounds. Captures are static illustrations; use the named lab links for the working tools.
 
 ## Project structure
 
@@ -80,6 +83,7 @@ The original browser suite operates all five workflows. The redesign suite addit
 - `src/lib/booleanLogic.ts` — typed Boolean operators, generated truth tables, and equivalence verification.
 - `src/lib/analysis.ts` — validated critical path, feasible semester planning, policies, correction sets and sensor rules.
 - `src/components/` — shared controls, circuits, truth/Karnaugh tables, Gantt/timeline, exports, skeletons and error boundary.
+- `src/components/landing/`, `src/styles/landing.css` — controlled lattice, typed catalog, theme-aware figures and isolated progressive motion.
 - `src/lib/sessionStore.ts`, `src/lib/useLabState.ts` — Zustand session state and validated sharing. Reloading restores defaults unless a scenario link is supplied.
 - `src/styles/` — documented theme tokens, component styling and reduced-motion-aware animations; imported once from `src/index.css`.
 - `PRODUCT.md`, `DESIGN.md` — product constraints and the Mathematical Atelier design language.

@@ -1,10 +1,10 @@
 # DiscreteLab Landing Page Art Direction — Implementation Plan
 
-**Status: Proof Atlas approved for implementation on 29 October 2026.**
+**Status: Proof Atlas implemented; final verification recorded in `FEATURE_AUDIT.md`.**
 
 Prepared 29 October 2026 against commit `c8fb781`, using the production preview at `http://127.0.0.1:5181/`. This document proposes three directions and develops the recommended one. The user selected Proof Atlas with “Codex — Proof Atlas Implementation.” The original planning specification below is retained as the approved design reference; the optional prototype picker is skipped for direct implementation.
 
-> **For agentic workers, after approval:** use `superpowers:executing-plans` to implement the approved scope task by task. The checkboxes below are future work, not authorization to execute. Revisit this document if a different direction is chosen.
+> **Implementation record:** the user approved A with “Codex — Proof Atlas Implementation.” The optional picker was skipped for direct implementation. The original design choices below remain the specification; completed behavior and measured checks are recorded in `FEATURE_AUDIT.md`.
 
 **Goal:** Give an interactive academic mathematics product a memorable, product-specific landing page that gets a student into an experiment quickly and demonstrates why changing an input changes an outcome.
 
@@ -479,16 +479,14 @@ All tasks inherit sections 2, 8 and 10: existing routes/engines/copy, default da
 
 The five failure classes most likely to be missed by attractive screenshots are: rapid mixed-input changes; keyboard focus hidden by decorative layout; dynamic reduced-motion/theme changes; async motion import completing after route unmount; and mobile/zoom text growth. Tasks below pin each to an actual browser check.
 
-### Task 1 — Approve and validate the visual composition
+### Task 1 — Approve and validate the visual composition (complete)
 
 **Files:** future isolated `prototypes/landing-atlas/index.html` and `prototypes/landing-atlas/` assets only if the user authorizes a prototype; this plan if decisions change.
 
 **Produces:** approved still desktop/phone composition and one agreed signature recipe. No production import.
 
-- [ ] Record the user's selected direction, palette/type constraints and any requested changes in this document.
-- [ ] If visual prototyping is wanted, invoke `prototype` for the single highest-risk piece: the opening hero/plate, with three distinct compositions within the selected direction. Use its prescribed picker and realistic copy. Keep it isolated; do not create this now.
-- [ ] Compare each full-size variant at 1440 and 390, keyboard and reduced motion. Never judge only thumbnails.
-- [ ] Obtain approval of the composition before promotion; remove unused prototypes on integration unless asked to retain them. If the user approves this complete storyboard for direct implementation, skip the optional prototype rather than adding another approval round by default.
+- [x] Recorded Proof Atlas approval and preserved the selected warm palette and local type.
+- [x] Optional picker skipped: the user approved this complete storyboard for direct implementation.
 
 ### Task 2 — Static atlas and preserved lattice behavior
 
@@ -497,11 +495,11 @@ The five failure classes most likely to be missed by attractive screenshots are:
 **Consumes:** approved static composition and current five-entry copy.  
 **Produces:** the controlled lattice/catalog interfaces in section 11, with fully visible static content.
 
-- [ ] Add a behavior baseline to `tests/landing-design.py`: exercise `00`, `01`, `10`, `11`; assert selected subset, `aria-pressed`, AND/OR values and all five `href`s. Test ten rapid alternating clicks and final state; ensure no queued animation changes the settled result.
-- [ ] Run against the current preview to record preservation behavior; new required 44px targets/named-phone-navigation checks should fail for a clearly identified current limitation.
-- [ ] Extract the controlled lattice and catalog data, then build the static hero/spreads with no JS motion. Pass `Shell`'s resolved theme into `Landing` and through the declared props. Preserve the exact B₂ graph and copy deck. Migrate only landing selectors; keep shared links/lab styles intact.
-- [ ] Check desktop/phone hierarchy in the browser, without waiting for a reveal. At 320px and 200% text zoom, assert no horizontal overflow or clipped CTA. Verify title, control and link reading order.
-- [ ] Run the lattice/route checks, `npm test`, `npm run lint`, `npm run build`; commit the independently usable static composition.
+- [x] Add a behavior baseline to `tests/landing-design.py`: exercise `00`, `01`, `10`, `11`; assert selected subset, `aria-pressed`, AND/OR values and all five `href`s. Test ten rapid alternating clicks and final state; ensure no queued animation changes the settled result.
+- [x] Run against the current preview to record preservation behavior; new required 44px targets/named-phone-navigation checks should fail for a clearly identified current limitation.
+- [x] Extract the controlled lattice and catalog data, then build the static hero/spreads with no JS motion. Pass `Shell`'s resolved theme into `Landing` and through the declared props. Preserve the exact B₂ graph and copy deck. Migrate only landing selectors; keep shared links/lab styles intact.
+- [x] Check desktop/phone hierarchy in the browser, without waiting for a reveal. At 320px and 200% text zoom, assert no horizontal overflow or clipped CTA. Verify title, control and link reading order.
+- [x] Run the lattice/route checks, `npm test`, `npm run lint`, `npm run build`; commit the independently usable static composition.
 
 ### Task 3 — Authentic product plates
 
@@ -510,11 +508,11 @@ The five failure classes most likely to be missed by attractive screenshots are:
 **Consumes:** `LabEntry`, actual application fixtures and resolved theme.  
 **Produces:** six named theme-aware responsive assets, capture manifest, static paired task scene.
 
-- [ ] Add assertions for image dimensions, six stem names, alt/caption presence and useful entry text when an image request fails. Check that default sample captions match current algorithms/fixtures.
-- [ ] Capture known scenarios from the real routes in an isolated context; create the prescribed crops and both widths/themes. Review labels at actual 390px display size and remove excess browser/UI chrome.
-- [ ] Wire `<picture>`/`srcset` with explicit dimensions and theme switching. Keep the lattice state stable through theme changes. Confirm phones do not download hidden desktop duplicates or both themes initially.
-- [ ] Show both task figures in normal flow, then verify that their data describe the same sample. Block all landing image URLs and confirm every lab remains understandable/reachable.
-- [ ] Measure actual image transfer, verify the ≤500KB active-theme set target and inspect a six-asset contact sheet. Commit plates and the repeatable capture utility.
+- [x] Add assertions for image dimensions, six stem names, alt/caption presence and useful entry text when an image request fails. Check that default sample captions match current algorithms/fixtures.
+- [x] Capture known scenarios from the real routes in an isolated context; create the prescribed crops and both widths/themes. Review labels at actual 390px display size and remove excess browser/UI chrome.
+- [x] Wire `<picture>`/`srcset` with explicit dimensions and theme switching. Keep the lattice state stable through theme changes. Confirm phones do not download hidden desktop duplicates or both themes initially.
+- [x] Show both task figures in normal flow, then verify that their data describe the same sample. Block all landing image URLs and confirm every lab remains understandable/reachable.
+- [x] Measure actual image transfer, verify the ≤500KB active-theme set target and inspect a six-asset contact sheet. Commit plates and the repeatable capture utility.
 
 ### Task 4 — Overview chrome and named navigation
 
@@ -523,10 +521,10 @@ The five failure classes most likely to be missed by attractive screenshots are:
 **Consumes:** the existing shell's handlers, routes and theme state.  
 **Produces:** overview-specific chrome without lab-wide visual regression.
 
-- [ ] Add keyboard tests: skip link; named links at 390px; theme/system/help controls; number-key navigation; route `h1` focus; back/forward. Assert no route destination changes. With focus on a non-control in Overview, press Space and assert native scroll advances; in `/fault`, confirm Space still starts/pauses simulation and is not intercepted while editing a field.
-- [ ] Add the explicit overview scope and readable wrapping navigation. Preserve all handlers; ensure `nav-selection` overrides affect only the overview and do not remove a laboratory's active state.
-- [ ] Verify at 320px, 390px, 768px and 1440px in both themes, plus text zoom. Keep focus outside sticky/animated figure layers. Ensure system theme remains available on the overview phone layout.
-- [ ] Run the existing full lab browser regressions to detect shared-CSS leakage, then commit the shell adaptation.
+- [x] Add keyboard tests: skip link; named links at 390px; theme/system/help controls; number-key navigation; route `h1` focus; back/forward. Assert no route destination changes. With focus on a non-control in Overview, press Space and assert native scroll advances; in `/fault`, confirm Space still starts/pauses simulation and is not intercepted while editing a field.
+- [x] Add the explicit overview scope and readable wrapping navigation. Preserve all handlers; ensure `nav-selection` overrides affect only the overview and do not remove a laboratory's active state.
+- [x] Verify at 320px, 390px, 768px and 1440px in both themes, plus text zoom. Keep focus outside sticky/animated figure layers. Ensure system theme remains available on the overview phone layout.
+- [x] Run the existing full lab browser regressions to detect shared-CSS leakage, then commit the shell adaptation.
 
 ### Task 5 — Progressive motion with a working static fallback
 
@@ -535,11 +533,11 @@ The five failure classes most likely to be missed by attractive screenshots are:
 **Consumes:** stable static figures, `useReducedMotionPreference`, `initTaskProofMotion` and cleanup contract.  
 **Produces:** one optional GSAP timeline/trigger and small scoped CSS feedback.
 
-- [ ] Add failure checks first: reduced motion at load and switched mid-scene; blocked scene chunk; unmount during a delayed import; short-height desktop; coarse-pointer mobile. In each case both task representations remain available and no stale spacer/style/listener survives.
-- [ ] If still approved and needed, add GSAP and implement only the section 6 scene with scoped context, media conditions, explicit `revert`, native scrolling and 240px progression. Use an inactive static default; catch import/setup failure without hiding content.
-- [ ] Add the one-time image entrances and immediate keyboard/static reduced-motion feedback. Test pointer hover separately from keyboard focus; do not animate control text or result computation.
-- [ ] Probe the scene at progress 0, .25, .5, .75 and 1, then scroll backward; compare both figures/captions. Navigate away/back repeatedly and inspect for duplicate triggers and console errors. Toggle the theme during the scene and repeat all four hero states.
-- [ ] Measure the new chunk and scroll trace against section 10. If late initialization changes layout/CLS, disable the scene for that visit or keep static flow. Commit only after fallback and cleanup tests pass.
+- [x] Add failure checks first: reduced motion at load and switched mid-scene; blocked scene chunk; unmount during a delayed import; short-height desktop; coarse-pointer mobile. In each case both task representations remain available and no stale spacer/style/listener survives.
+- [x] If still approved and needed, add GSAP and implement only the section 6 scene with scoped context, media conditions, explicit `revert`, native scrolling and 240px progression. Use an inactive static default; catch import/setup failure without hiding content.
+- [x] Add the one-time image entrances and immediate keyboard/static reduced-motion feedback. Test pointer hover separately from keyboard focus; do not animate control text or result computation.
+- [x] Probe the scene at progress 0, .25, .5, .75 and 1, then scroll backward; compare both figures/captions. Navigate away/back repeatedly and inspect for duplicate triggers and console errors. Toggle the theme during the scene and repeat all four hero states.
+- [x] Measure the new chunk and scroll trace against section 10. If late initialization changes layout/CLS, disable the scene for that visit or keep static flow. Commit only after fallback and cleanup tests pass.
 
 ### Task 6 — Final visual and functional gate
 
@@ -548,12 +546,12 @@ The five failure classes most likely to be missed by attractive screenshots are:
 **Consumes:** final production build, complete asset set and all prior behavior contracts.  
 **Produces:** verified build, before/after evidence and accurate docs.
 
-- [ ] Run `npm test`, `npm run lint`, `npm run build`; expect all 14 existing unit tests and zero build/lint errors. Extend test count if behavior tests are added; do not delete mathematical coverage.
-- [ ] Serve the production preview; run `tests/browser.py`, `tests/redesign.py`, `tests/warm-polish.py` and `tests/landing-design.py` using `DISCRETELAB_TEST_URL` for the chosen preview port.
-- [ ] Capture 1440, 768, 390 and 320 widths in both themes, plus 1440 × 768, 390 × 844, 375 × 812, reduced motion and 200% text zoom. Open the captures and inspect all catalog entries, not just the first fold.
-- [ ] Run the taste lint/inspector against the landing scope/production URL. Document the brand-palette and real-mathematical-diagram exceptions precisely; do not claim zero rule failures by broadly exempting the page as an app fragment.
-- [ ] Inspect the task scene at intermediate progress, contrast/focus and asset-failure states; measure actual transfer and performance. Use design judgment over the taste tool's motion-count floor: do not add gratuitous moving nodes merely to hit its counter.
-- [ ] Update `DESIGN.md`, README/demo/audit with actual shipped choices and measured limits. Review the diff for unintended module/session/engine changes. Commit in coherent pieces and follow the user's existing repository integration instructions when implementation is authorized.
+- [x] Run `npm test`, `npm run lint`, `npm run build`; expect all 14 existing unit tests and zero build/lint errors. Extend test count if behavior tests are added; do not delete mathematical coverage.
+- [x] Serve the production preview; run `tests/browser.py`, `tests/redesign.py`, `tests/warm-polish.py` and `tests/landing-design.py` using `DISCRETELAB_TEST_URL` for the chosen preview port.
+- [x] Capture 1440, 768, 390 and 320 widths in both themes, plus 1440 × 768, 390 × 844, 375 × 812, reduced motion and 200% text zoom. Open the captures and inspect all catalog entries, not just the first fold.
+- [x] Run the taste lint/inspector against the landing scope/production URL. Document the brand-palette and real-mathematical-diagram exceptions precisely; do not claim zero rule failures by broadly exempting the page as an app fragment.
+- [x] Inspect the task scene at intermediate progress, contrast/focus and asset-failure states; measure actual transfer and performance. Use design judgment over the taste tool's motion-count floor: do not add gratuitous moving nodes merely to hit its counter.
+- [x] Update `DESIGN.md`, README/demo/audit with actual shipped choices and measured limits. Review the diff for unintended module/session/engine changes. Commit in coherent pieces and follow the user's existing repository integration instructions when implementation is authorized.
 
 ## 13. Planning provenance and deliberate adaptations
 
@@ -568,6 +566,6 @@ The five failure classes most likely to be missed by attractive screenshots are:
 
 **Planning baseline:** no application source, dependencies or shipped assets were changed during the planning task. Browser captures and dealt direction sheets are inspection artifacts under ignored `.tmp/`. No redesign has been implemented or published.
 
-The decision is **Proof Atlas**, **Logic in the Sentence**, or **Laboratory Folio**. My recommendation is **Proof Atlas**, using the existing warm dark/light palette and local Newsreader/Inter, with authentic application plates and the one optional desktop explanatory scene.
+The selected direction is **Proof Atlas**, using the existing warm dark/light palette and local Newsreader/Inter, with authentic application plates and the one optional desktop explanatory scene. B and C remain considered alternatives, not additional implementation requirements.
 
 Approval should identify the chosen direction and any amendments. Approving the visual direction authorizes work on that direction's agreed plan; it does not turn the other two into additional build requirements. If the user chooses B or C, revise the detailed storyboard/file plan before implementation. Approval has now arrived for A; implement only Proof Atlas and verify the preservation contracts.

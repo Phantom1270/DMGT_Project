@@ -62,3 +62,9 @@ Concepts: strict > thresholds, root-cause branches, distributive law, and gate-c
 ## Warm presentation and reports
 
 The header theme toggle switches between espresso/amber dark mode and archival parchment light mode. Newsreader headings and copper/brass diagrams replace the previous neon treatment. Use Analysis as PDF in Export / share for a structured mathematical report with active inputs, computed summary tables, assumptions and page numbering. In the machine K-map, inspect T=1, V=0, C=1 and apply it: readings become temperature threshold + 1, vibration exactly at its threshold, and cooling failed. The TC branch triggers and event history records the transition.
+
+## Proof Atlas overview
+
+On `/`, toggle `a` and `b` to visit all four subsets. Meet/AND and join/OR values update immediately. The illustrated index links to the same five working labs; its images show documented sample states, not the current session's edits. On eligible desktop screens, scroll through the task entry to compare dependency order with a four-unit Gantt schedule. Both depict the same default project; the parallel frontend task has one unit of slack.
+
+On a phone the destination names remain visible, controls are larger, and the two task figures appear in ordinary reading order. Enable the OS reduced-motion preference to get the same static presentation on desktop. Space scrolls the overview; inside a simulation lab it still controls playback. Theme, system-theme and shortcut controls remain available.
