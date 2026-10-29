@@ -2,12 +2,18 @@
 
 Use **Start demo** inside any module for a short guided walkthrough. All examples use simulated data. Navigation preserves module inputs for the current page session; reloading starts a fresh session.
 
+The new overview includes a live Boolean lattice. Toggle `a` and `b` and inspect meet (AND) and join (OR). Launch a lab from its card or use `1–5`. Theme controls are in the header; `D` switches themes and `?` opens shortcut help.
+
+Guided-demo steps now highlight the relevant input or visualization. Each module's Export / share menu can save a diagram, table or PDF, or copy a scenario link that restores the inputs in a fresh page.
+
 ## Task dependency planner
 
 1. Reset the example: four unit-duration stages and a project duration of 4.
 2. Select Build backend, start what-if, and set duration to 3. The project now takes 6 units. Compare earliest/latest times and zero-slack tasks; discard the scenario to restore 4.
 3. Select Integrate API and add Design database as another prerequisite. Direct mode shows the extra edge; Hasse mode removes it because database already precedes backend and integration.
 4. Load the cycle example. Scheduling is disabled and cycle edges turn red. Reset, then use Next/Previous or Play to explore topological sorting.
+
+Switch to **Gantt chart** to see actual-duration bars and amber critical connections. Hover/focus a bar to inspect its times; click it to edit that task. Use Ctrl/⌘+Z and Y outside fields to undo/redo edits.
 
 Concepts: partial orders, reachability, covering relations, topological layers, and critical path under unlimited workers. Completion switches control readiness; project timing covers the entire project.
 
@@ -17,6 +23,8 @@ Concepts: partial orders, reachability, covering relations, topological layers, 
 2. Complete Discrete Mathematics. Algorithms becomes eligible. Inspect its node and missing prerequisite explanations.
 3. Start what-if completion, mark Algorithms complete, and observe Machine Learning unlock. Discard to restore the transcript.
 4. Change maximum courses per semester and inspect the target-based feasible plan. Marking an advanced course completed out of order produces a consistency warning rather than rewriting history.
+
+The semester timeline draws actual prerequisite connections between course cards. Completed selections appear in a separate recorded-history lane.
 
 Concepts: direct versus transitive prerequisites and capacity-constrained feasible schedules. This is a hypothetical plan, not official registration or a globally optimal timetable.
 
@@ -36,6 +44,8 @@ Concepts: threshold conversion, AND/OR, intermediate gate evaluation, and nonequ
 3. Compare an applicant and lower attendance to 74%. Both qualifying pathways are blocked by C. Discard the alternative.
 4. Inspect minimal correction sets, switch demonstration policies, and explore truth-table rows without changing numeric inputs.
 
+Inspect the four-variable Karnaugh map: rows and columns follow Gray-code order. Clicking a cell reveals its Boolean combination without changing the numeric applicant.
+
 Concepts: necessary conditions, alternative sufficient pathways, sensitivity to single flips, and minimal sets of failed conditions to correct. These are hypothetical scholarship policies.
 
 ## Machine fault detection
@@ -44,5 +54,7 @@ Concepts: necessary conditions, alternative sufficient pathways, sensitivity to 
 2. Simulate cooling failure: TC triggers a fault. Set temperature to exactly 80°C: T=0 and the fault clears.
 3. Inspect synchronized original and simplified circuits, all 8 truth-table combinations, and actual event transitions.
 4. Start simulation to replay six deterministic states. Pause or reset, and adjust the simulation interval.
+
+Compare the three-variable Karnaugh map with the two circuit designs. The map's true cells form the two overlapping pairs TV and TC; both circuits still produce the same result in all eight combinations. Space plays/pauses when focus is outside a field or button.
 
 Concepts: strict > thresholds, root-cause branches, distributive law, and gate-count reduction from 3 to 2 two-input gates. A false illustrative fault rule is not a real-world safety guarantee.
