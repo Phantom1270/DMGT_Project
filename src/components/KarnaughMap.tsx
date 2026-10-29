@@ -4,15 +4,20 @@ export function KarnaughMap({
   variables,
   evaluate,
   current,
+  onApply,
 }: {
   variables: string[];
   evaluate: (bits: boolean[]) => boolean;
   current: boolean[];
+  onApply?: (bits: boolean[]) => void;
 }) {
   const [selected, setSelected] = useState<boolean[] | null>(null),
     gray = [0, 1, 3, 2],
     four = variables.length === 4,
     rowCount = four ? 4 : 2;
+  const [notice, setNotice] = useState<{ text: string; error: boolean } | null>(
+    null,
+  );
   return (
     <section className="kmap">
       <h3>Karnaugh map · Gray-code order</h3>
@@ -51,7 +56,10 @@ export function KarnaughMap({
                   className={`${value ? "true" : ""} ${bits.every((b, i) => b === current[i]) ? "current" : ""}`}
                   key={`${row}-${col}`}
                   aria-label={`${variables.map((v, i) => `${v}=${Number(bits[i])}`).join(", ")}, output ${Number(value)}`}
-                  onClick={() => setSelected(bits)}
+                  onClick={() => {
+                    setSelected(bits);
+                    setNotice(null);
+                  }}
                 >
                   {Number(value)}
                 </button>
@@ -61,10 +69,43 @@ export function KarnaughMap({
         })}
       </div>
       {selected && (
-        <p aria-live="polite">
-          {variables.map((v, i) => `${v}=${Number(selected[i])}`).join(", ")} →
-          output {Number(evaluate(selected))}
-        </p>
+        <div className="kmap-inspection">
+          <p aria-live="polite">
+            {variables.map((v, i) => `${v}=${Number(selected[i])}`).join(", ")}{" "}
+            → output {Number(evaluate(selected))}
+          </p>
+          {onApply && (
+            <button
+              onClick={() => {
+                try {
+                  onApply(selected);
+                  setNotice({
+                    text: "Combination applied. Inputs, gates and results now reflect the selected cell.",
+                    error: false,
+                  });
+                } catch (error) {
+                  setNotice({
+                    text:
+                      error instanceof Error
+                        ? error.message
+                        : "This combination could not be applied.",
+                    error: true,
+                  });
+                }
+              }}
+            >
+              Apply combination to scenario
+            </button>
+          )}
+          {notice && (
+            <p
+              role={notice.error ? "alert" : "status"}
+              className={notice.error ? "alert" : ""}
+            >
+              {notice.text}
+            </p>
+          )}
+        </div>
       )}
       {variables.length === 3 && (
         <p>

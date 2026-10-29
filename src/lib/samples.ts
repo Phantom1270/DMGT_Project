@@ -19,3 +19,26 @@ export const courseSample = [
   work("m", "Machine Learning", ["a"]),
   work("l", "Deep Learning", ["m"]),
 ];
+export const homeSample = {
+  brightness: 20,
+  temperature: 30,
+  darkness: 30,
+  hot: 28,
+  p: true,
+  m: false,
+  s: false,
+  o: false,
+};
+export const applicantSample = {
+  cgpa: 8.4,
+  income: 300000,
+  attendance: 75,
+  achievement: false,
+};
+export const scholarshipThresholds = {
+  cgpa: 8.5,
+  income: 300000,
+  attendance: 75,
+};
+export const machineSample = { temperature: 95, vibration: 12, cooling: true };
+export const machineLimits = { temperature: 80, vibration: 10 };

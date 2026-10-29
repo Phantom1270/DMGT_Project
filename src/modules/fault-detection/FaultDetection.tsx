@@ -3,7 +3,7 @@ import { KarnaughMap } from "../../components/KarnaughMap";
 import { MAX_EVENTS } from "../../lib/constants";
 import { useLabState } from "../../lib/useLabState";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { fault } from "../../lib/analysis";
+import { fault, faultScenario } from "../../lib/analysis";
 import { BooleanCircuit } from "../../components/BooleanCircuit";
 import { inputGate, gate } from "../../lib/circuit";
 import {
@@ -360,6 +360,10 @@ export default function Fault() {
           <Panel title="Exhaustive equivalence">
             <MathFormula block expression="F=TV+TC=T(V+C)" />
             <KarnaughMap
+              onApply={(chosen) => {
+                setRunning(false);
+                change(faultScenario(chosen, limits));
+              }}
               variables={["T", "V", "C"]}
               evaluate={(bits) => (bits[0] && bits[1]) || (bits[0] && bits[2])}
               current={[t, v, c]}

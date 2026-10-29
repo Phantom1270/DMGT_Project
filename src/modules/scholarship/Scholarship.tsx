@@ -1,8 +1,10 @@
+import { applicantSample as sample } from "../../lib/samples";
 import { MathFormula } from "../../components/Math";
 import { KarnaughMap } from "../../components/KarnaughMap";
 import { useLabState } from "../../lib/useLabState";
 import {
   applicantBits,
+  scholarshipScenario,
   corrections,
   policyExpressions,
   policyNames,
@@ -19,12 +21,6 @@ import {
   Panel,
   TruthTable,
 } from "../../components/Lab";
-const sample = {
-  cgpa: 8.4,
-  income: 300000,
-  attendance: 75,
-  achievement: false,
-};
 export default function Scholarship() {
   const [applicant, set] = useLabState("applicant", sample),
     [draft, setDraft] = useLabState<typeof sample | null>(
@@ -327,6 +323,9 @@ export default function Scholarship() {
             </p>
           </Explanation>
           <KarnaughMap
+            onApply={(chosen) =>
+              update(scholarshipScenario(chosen, thresholds))
+            }
             variables={symbols}
             evaluate={(x) => scholarship(x, policy)}
             current={bits}

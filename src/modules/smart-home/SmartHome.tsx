@@ -1,3 +1,4 @@
+import { homeSample as sample } from "../../lib/samples";
 import { MathFormula } from "../../components/Math";
 import { useLabState } from "../../lib/useLabState";
 import { useState } from "react";
@@ -13,16 +14,6 @@ import {
   Playback,
   TruthTable,
 } from "../../components/Lab";
-const sample = {
-  brightness: 20,
-  temperature: 30,
-  darkness: 30,
-  hot: 28,
-  p: true,
-  m: false,
-  s: false,
-  o: false,
-};
 const presets = [
   {
     name: "Empty daytime",

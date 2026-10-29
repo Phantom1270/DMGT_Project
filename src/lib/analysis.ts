@@ -186,3 +186,56 @@ export function fault(
     simplified: t && (v || cooling),
   };
 }
+export function scholarshipScenario(
+  bits: boolean[],
+  thresholds: { cgpa: number; income: number; attendance: number },
+) {
+  if (
+    bits.length !== 4 ||
+    bits.some((b) => typeof b !== "boolean") ||
+    !Object.values(thresholds).every(Number.isFinite) ||
+    thresholds.cgpa < 0 ||
+    thresholds.cgpa > 10 ||
+    thresholds.income < 0 ||
+    thresholds.attendance < 0 ||
+    thresholds.attendance > 100
+  )
+    throw new Error(
+      "Set valid policy thresholds before applying a combination.",
+    );
+  if (!bits[0] && thresholds.cgpa === 0)
+    throw new Error(
+      "A=0 cannot be represented with a minimum CGPA of 0. Increase the policy threshold first.",
+    );
+  if (!bits[2] && thresholds.attendance === 0)
+    throw new Error(
+      "C=0 cannot be represented with a minimum attendance of 0%. Increase the policy threshold first.",
+    );
+  return {
+    cgpa: bits[0] ? thresholds.cgpa : Math.max(0, thresholds.cgpa - 0.1),
+    income: bits[1] ? thresholds.income : thresholds.income + 1,
+    attendance: bits[2]
+      ? thresholds.attendance
+      : Math.max(0, thresholds.attendance - 1),
+    achievement: bits[3],
+  };
+}
+export function faultScenario(
+  bits: boolean[],
+  limits: { temperature: number; vibration: number },
+) {
+  if (
+    bits.length !== 3 ||
+    bits.some((b) => typeof b !== "boolean") ||
+    !Object.values(limits).every(Number.isFinite) ||
+    limits.vibration < 0
+  )
+    throw new Error(
+      "Set valid machine thresholds before applying a combination.",
+    );
+  return {
+    temperature: limits.temperature + (bits[0] ? 1 : 0),
+    vibration: limits.vibration + (bits[1] ? 1 : 0),
+    cooling: bits[2],
+  };
+}

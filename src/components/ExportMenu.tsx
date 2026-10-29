@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Download, Link as LinkIcon, FileText, Image } from "lucide-react";
-import { encodeScenario, sharePayload } from "../lib/sessionStore";
+import { encodeScenario, sharePayload, useSession } from "../lib/sessionStore";
 function save(data: Blob, name: string) {
   const url = URL.createObjectURL(data);
   const a = document.createElement("a");
@@ -79,41 +79,46 @@ export function ExportMenu() {
     setMessage("Table data exported as CSV.");
   };
   const pdf = async () => {
-    const { jsPDF } = await import("jspdf");
-    const doc = new jsPDF();
-    doc.setFontSize(20);
-    doc.text(`DiscreteLab - ${module}`, 18, 22);
-    doc.setFontSize(10);
-    let y = 36;
-    const lines =
-      document
-        .querySelector<HTMLElement>("#workspace")
-        ?.innerText.split("\n")
-        .map((s) => s.trim())
-        .filter(Boolean) ?? [];
-    for (const line of lines) {
-      for (const part of doc.splitTextToSize(
-        line
-          .replaceAll("∧", " AND ")
-          .replaceAll("∨", " OR ")
-          .replaceAll("→", " -> ")
-          .replaceAll("≥", " >= ")
-          .replaceAll("≤", " <= ")
-          .replaceAll("₹", "INR ")
-          .replace(/[^\x20-\x7E]/g, " "),
-        175,
-      ) as string[]) {
-        if (y > 280) {
-          doc.addPage();
-          y = 20;
-        }
-        doc.text(part, 18, y);
-        y += 5;
-      }
-      y += 2;
-    }
-    doc.save(`discretelab-${module}-analysis.pdf`);
-    setMessage("Analysis report exported as PDF.");
+    const [{ buildReport }, { renderReport }] = await Promise.all([
+      import("../lib/report"),
+      import("../lib/renderReport"),
+    ]);
+    const fields = [
+      ...document.querySelectorAll<HTMLInputElement | HTMLSelectElement>(
+        "#workspace input, #workspace select",
+      ),
+    ];
+    const parameters: [string, string][] = fields.flatMap((field) => {
+      const label = field.closest("label")?.cloneNode(true) as
+        HTMLElement | undefined;
+      label
+        ?.querySelectorAll("input,select,button")
+        .forEach((node) => node.remove());
+      const name =
+        label?.textContent?.trim() ||
+        field.getAttribute("aria-label") ||
+        "Input";
+      if (name === "New item name" && !field.value) return [];
+      const context =
+        field
+          .closest("fieldset")
+          ?.querySelector("legend")
+          ?.textContent?.trim() ||
+        field.closest("section")?.querySelector("h2")?.textContent?.trim();
+      const value =
+        field instanceof HTMLSelectElement
+          ? (field.selectedOptions[0]?.textContent ?? "None")
+          : field.type === "checkbox"
+            ? field.checked
+              ? "Yes"
+              : "No"
+            : field.value || "Not set";
+      return [[context ? `${context} / ${name}` : name, value]];
+    });
+    renderReport(
+      buildReport(module, useSession.getState().values, parameters),
+    ).save(`discretelab-${module}-analysis.pdf`);
+    setMessage("Editorial mathematical report exported as PDF.");
   };
   const share = async () => {
     const encoded = encodeScenario(sharePayload(module));

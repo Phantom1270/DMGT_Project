@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 .tmp/
 tests/*.png
+tests/*.pdf
 tests/lighthouse*
 tests/__pycache__/
 dist
